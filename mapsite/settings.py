@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'mapsite', 
+    'mapsite',
 
     'allauth', 
     'allauth.account',
@@ -142,7 +142,7 @@ AUTHENTICATION_BACKENDS = (
  'allauth.account.auth_backends.AuthenticationBackend',
  )
 
-SITE_ID = 3
+SITE_ID = 2
 
 LOGIN_REDIRECT_URL = '/'
 
