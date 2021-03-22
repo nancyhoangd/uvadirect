@@ -13,9 +13,11 @@ def edit_info(request):
     if request.method == 'POST':
         classesToBeDeleted = request.POST.getlist('class[]')
         for classDelete in classesToBeDeleted: #classDelete is a string name of class to be deleted
-            obj = Class.objects.get(class_name = classDelete)
-            request.user.profile.classes.remove(obj) #only works if there are no duplicate names in students classes
-            request.user.save()    
+            # obj = Class.objects.get(class_name = classDelete)
+            obj = request.user.profile.classes.get(class_name = classDelete)
+            request.user.profile.classes.remove(obj) 
+            request.user.save() 
+            obj.delete()
     return HttpResponseRedirect('/profile_page/schedule/')
 
 def privacy(request):
@@ -28,9 +30,6 @@ def schedule(request):
         form = ScheduleForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
             newClass = Class()
             newClass.class_name = form.cleaned_data['class_name']
             newClass.time = form.cleaned_data['time']
