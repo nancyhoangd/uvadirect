@@ -20,6 +20,9 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('', TemplateView.as_view(template_name="mapsite/index.html")),
     path('start/', include('start.urls')),
+    path('profile_page/', include('profile_page.urls')),
+    path('map_page/', include('map_page.urls')),
+    path('find_friend/', include('find_friend.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
 ]
