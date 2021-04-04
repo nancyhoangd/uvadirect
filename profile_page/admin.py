@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import profile, Class
+from .models import profile, Class, FriendRequest
 from django.contrib.auth.admin import UserAdmin
 
 # add classes as well
@@ -8,3 +8,4 @@ UserAdmin.list_filter += ('profile',)
 
 admin.site.register(profile)
 admin.site.register(Class)
+admin.site.register(FriendRequest)

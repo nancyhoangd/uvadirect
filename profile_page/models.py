@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-from django.contrib.postgres.fields import ArrayField
 
 class Class(models.Model):
     class_name = models.CharField(max_length=200)
@@ -17,11 +16,30 @@ class Class(models.Model):
 class profile(models.Model):
     profile = models.OneToOneField(User, on_delete = models.CASCADE, primary_key=True)
     classes = models.ManyToManyField(Class,blank=True)
+    friends = models.ManyToManyField('self', related_name = "friends_list+", blank = True)
+    friends_requests = models.ManyToManyField('FriendRequest', blank = True)
+    location_sharing = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.profile.username
+        name = self.profile.get_full_name()
+        if name == "":
+            name = self.profile.username
+        return name
+
+    def location_sharing_settings(self):
+        return self.location_sharing
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     for user in User.objects.all():
         profile.objects.get_or_create(profile=user)
+
+class FriendRequest(models.Model):
+    to_user = models.CharField(max_length = 200)
+    from_user = models.CharField(max_length = 200)
+
+    def __str__(self):
+        return ("Request from user: " + self.from_user)
+
+    class Meta:
+        unique_together = ("to_user", "from_user")
