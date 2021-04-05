@@ -1,21 +1,63 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Interactive maps for Django web apps</title>
+    {% load static %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>UVA Direct - Map</title>
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" >
+    <!-- Map API -->
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />
   </head>
-  <body>
-   <h1>Map time!</h1>
-   <div id='map' width="100%" style='height:400px'></div>
-   <script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoibWFwcHJvamVjdDMyNDAiLCJhIjoiY2ttdHBzMWJuMGYwcjJ2cGRxaXVhaWtvMCJ9.xH-3a-x9qOF11YWF08rM6Q';
-    var map = new mapboxgl.Map({
-     container: 'map',
-     style: 'mapbox://styles/mapbox/streets-v10',
-     center: [-78.509, 38.0338],
-     zoom: 14.5
-    });
-   </script>
+  <body style="background-color: rgb(27, 168, 168);">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav" style="background-color: rgb(46, 75, 168);">
+      <div class="container">
+          <a class="navbar-brand js-scroll-trigger" href="../../start">
+              <!-- compact UVA Logo : aspect ratio 735 x 358 or 2.05 to 1-->
+              <img src="{% static 'assets/img/UVA_Direct_compact.png' %}" style="width: 80;height:40px;" alt="UVA Direct"/>
+          </a>
+          <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              Menu
+              <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ml-auto">
+                  <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../start#weather">Weather</a></li>
+                  <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../start#map">Map</a></li>
+                  <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../start#schedule">Schedule</a></li>
+                  <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../start#friends">Friends</a></li>
+                  <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../start#about">About</a></li>
+              </ul>
+          </div>
+      </div>
+    </nav>
+    
+    <!-- MAP DISPLAY -->
+    <div style = "height:550px; padding-top: 6rem;">
+      <a href = ".">
+        <h1 class="page-section-heading text-left text-uppercase text-secondary mb-0" style="padding-top: 1rem; margin-left: 3rem;">Map</h1>
+      </a>
+      <div id='map' style='margin-left: 3rem; margin-right: 3rem; height: 360px; padding-top: 1rem'>
+        <script>
+          mapboxgl.accessToken = 'pk.eyJ1IjoibWFwcHJvamVjdDMyNDAiLCJhIjoiY2ttdHBzMWJuMGYwcjJ2cGRxaXVhaWtvMCJ9.xH-3a-x9qOF11YWF08rM6Q';
+          var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v10',
+            center: [-78.509, 38.0338],
+            zoom: 14.5
+          });
+        </script>
+      </div>
+   </div>
   </body>
 </html>

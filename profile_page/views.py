@@ -8,8 +8,8 @@ from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 
 
-def profile(request):
-    return HttpResponse("Display Profile Info Here")
+def profile_view(request):
+    return render(request, 'mapsite/profile_view.html/')
 
 def edit_info(request): 
     if request.method == 'POST':
