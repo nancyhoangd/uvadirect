@@ -24,7 +24,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav" style="background-color: rgb(46, 75, 168);">
             <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top">
+                <a class="navbar-brand js-scroll-trigger" href="../start">
                     <!-- compact UVA Logo : aspect ratio 735 x 358 or 2.05 to 1-->
                     <img src="{% static 'assets/img/UVA_Direct_compact.png' %}" style="width: 80;height:40px;" alt="UVA Direct"/>
                 </a>
@@ -35,9 +35,9 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#weather">Weather</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#map">Map</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#schedule">Schedule</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#friends">Friends</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../map_page/default">Map</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../profile_page/schedule">Schedule</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../profile_page/friends">Friends</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a></li>
                     </ul>
                 </div>
@@ -99,13 +99,43 @@
                 <a href="../profile_page/schedule/">
                     <h2 class="page-section-heading text-left text-uppercase text-secondary mb-0">Schedule</h2>
                 </a>
+                <h3>
+            Current Classes:
+            {% if user.profile.classes %}
+            <ul>
+            {% for class in user.profile.classes.all %}
+                <li>
+                    {{class.class_name}} at {{class.time}} on {{class.days}}
+                    in {{class.building}} {{class.building_number}}
+                </li>
+            {% endfor %}
+            </ul>
+            {% else %}
+                <p>No classes to show.</p>
+            {% endif %}
+        </h3>
             </div>
         </section>
         <!-- Friends Section -->
         <section class="page-section map" id="friends" style="background-color: rgb(137, 184, 247);">
             <div class="container">
                 <!-- Friends Section Heading-->
+                <a href="../profile_page/friends/">
                 <h2 class="page-section-heading text-left text-uppercase text-secondary mb-0">Friends</h2>
+                    <h3>
+        Friends List:
+        {% if user.profile.friends %}
+        <ul>
+        {% for friend in user.profile.friends.all %}
+            <li>
+                {{friend.profile.username}}
+            </li>
+        {% endfor %}
+        </ul>
+        {% else %}
+            <p>No friends to show.</p>
+        {% endif %}
+    </h3>
             </div>
         </section>
         <!-- About Section-->
