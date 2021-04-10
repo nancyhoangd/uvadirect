@@ -1,14 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views import View
 
 #if this doesnt work import at beg of every function
 import requests
 import json
 
-
-
-def index(request):
-    return HttpResponse("Hello, world. You're at the Grounds Map Start index.")
+def index_view(request):
+    return render(request, 'start_page.html', {'weatherRequest': weather(request)})
 
 # for the weather tab
 def weather(request):
@@ -21,6 +20,3 @@ def weather(request):
 def home(request):
     return HttpResponse("Hello, world. You're at the Grounds Map Start home.")
 
-
-def weather(request):
-    return HttpResponse("Weather Page")

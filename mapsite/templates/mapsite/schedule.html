@@ -1,49 +1,89 @@
 <!DOCTYPE html>
-{% load socialaccount %}
 <html lang="en">
-    <h1>
-        Hello {{ user.profile }}, enter information to add a class to your schedule below:
-    </h1> 
-    <h3>
-        Current Classes:
-        {% if user.profile.classes %}
-        <ul>
-        {% for class in user.profile.classes.all %}
-            <li>
-                {{class.class_name}} at {{class.time}} on {{class.days}}
-                in {{class.building}} {{class.building_number}}
-            </li>
-        {% endfor %}
-        </ul>
-        {% else %}
-            <p>No classes to show.</p>
-        {% endif %}
-    </h3>
- 
-    <form action='/profile_page/schedule/' method="post">
-        {% csrf_token %}
-        {{ form }}
-        <br>
-        <input type="submit" value="Done!">
-    </form>
-
-    <h3>
-        Remove A Current Class:
-        <br>
-        <form action='/profile_page/edit_info/' method="post" name="removeForm">
-            {% csrf_token %}
+    <head> 
+        {% load socialaccount %}
+        {% load static %}
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>UVA Direct - Map</title>
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" >
+        <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />}
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav" style="background-color: rgb(46, 75, 168);">
+            <div class="container">
+                <a class="navbar-brand js-scroll-trigger" href="../../start">
+                    <!-- compact UVA Logo : aspect ratio 735 x 358 or 2.05 to 1-->
+                    <img src="{% static 'assets/img/UVA_Direct_compact.png' %}" style="width: 80;height:40px;" alt="UVA Direct"/>
+                </a>
+                <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../start#weather">Weather</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../map_page/default">Map</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../profile_page/schedule">Schedule</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../profile_page/friends">Friends</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../start#about">About</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <h1 style="padding-top: 6rem">
+            Hello {{ user.profile }}, enter information to add a class to your schedule below:
+        </h1> 
+        <h3>
+            Current Classes:
             {% if user.profile.classes %}
+            <ul>
             {% for class in user.profile.classes.all %}
-                <input type="checkbox" name="class[]" value="{{class.class_name}}">
-                <label for="class"> {{class.class_name }}</label><br>
+                <li>
+                    {{class.class_name}} at {{class.time}} on {{class.days}}
+                    in {{class.building}} {{class.building_number}}
+                </li>
             {% endfor %}
+            </ul>
             {% else %}
                 <p>No classes to show.</p>
             {% endif %}
-            <p>
-                <input type="submit" value="Delete">
-            </p>
+        </h3>
+    
+        <form action='/profile_page/schedule/' method="post">
+            {% csrf_token %}
+            {{ form }}
+            <br>
+            <input type="submit" value="Done!">
         </form>
-    </h3>
 
+        <h3>
+            Remove A Current Class:
+            <br>
+            <form action='/profile_page/edit_info/' method="post" name="removeForm">
+                {% csrf_token %}
+                {% if user.profile.classes %}
+                {% for class in user.profile.classes.all %}
+                    <input type="checkbox" name="class[]" value="{{class.class_name}}">
+                    <label for="class"> {{class.class_name }}</label><br>
+                {% endfor %}
+                {% else %}
+                    <p>No classes to show.</p>
+                {% endif %}
+                <p>
+                    <input type="submit" value="Delete">
+                </p>
+            </form>
+        </h3>
+    </body>
 </html>
