@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     {% load static %}
+    <!-- {% load mathfilters %} -->
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
@@ -74,7 +75,18 @@
         <!-- Today's Simple Weather Forecast-->
         <div class="row justify-content-left">
             {% for hour in weatherRequest.hourly %}
-            {{ hour.feels_like }}
+            <!-- change from kelvin to fahrenheit-->
+            <!-- { 1.8 * ({hour.temp} - 273) + 32 } -->
+            {% with sub_part=hour.temp|sub:273 %}
+            {% with mult_part=1.8|mul:sub_part %}
+            {% with add_part=mult_part|addition:32 %}
+            {{ add_part|floatformat:0 }}
+            {% endwith %}
+            {% endwith %}
+            {% endwith %}
+            {% with weather=hour.weather.0.main %}
+            {{ weather }}
+            {% endwith %}
             {% endfor %}
         </div>
         <!-- Weather Grid Items-->
