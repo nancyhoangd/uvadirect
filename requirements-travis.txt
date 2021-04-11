@@ -2,3 +2,4 @@ Django
 gunicorn
 django-allauth
 psycopg2==2.8.6
+django-mathfilters
