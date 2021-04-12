@@ -7,6 +7,7 @@ django-bootstrap4==2.3.1
 django-crispy-forms==1.11.0
 django-heroku==0.3.1
 django-allauth
+django-mathfilters
 gunicorn==20.0.4
 isort==5.7.0
 lazy-object-proxy==1.4.3
