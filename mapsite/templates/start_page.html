@@ -13,12 +13,10 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static 'css/styles.css' %}" rel="stylesheet" >
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css">
         <!-- Map API -->
         <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
         <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />
-        <!-- Weather Parsing -->
-        <script src="{% static 'js/weather_script.js' %}"></script>
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -44,7 +42,7 @@
             </div>
         </nav>
         <!-- Masthead-->
-        <header class="masthead text-black text-center" style="background-color: rgb(115, 180, 255); padding-top: calc(3rem + 80px); padding-bottom: 4rem;">
+        <header class="masthead text-black text-center" style="background-color: rgb(221, 238, 252); padding-top: calc(3rem + 80px); padding-bottom: 4rem;">
             <div class="container d-flex align-items-center flex-column">  
                 <!-- UVA DIRECT Logo - Aspect ratio of logo: 2095px x 957px or 2.189 to 1 -->
                 <img src="{% static 'assets/img/UVA_Direct_logo.png' %}" alt="UVA Direct!!" style="width: 656px;height:300px;">
@@ -57,19 +55,55 @@
             </div>
         </header>
         <!-- Weather Section-->
-        <section class="page-section weather" id="weather">
+        <section class="page-section weather" id="weather" style="background-color: rgb(73, 192, 247);">
             <div class="container">
                 <!-- Weather Section Heading-->
                 <h2 class="page-section-heading text-left text-uppercase text-secondary mb-0">Weather</h2>
-                <!-- Today's Simple Weather Forecast-->
-                <div class="row justify-content-left">
-                    {% for hour in weatherRequest.hourly %}
-                        {{ hour.feels_like }} 
-                    {% endfor %}
-                </div>
-                <!-- Weather Grid Items-->
-                <div class="row justify-content-center">
-                    
+                
+                <div class="container-weather">
+                    <!-- Weather for Today -->
+                    <div class="" style="padding-top: 3rem;">
+                        <div class="weather-box">
+                            <div class="weather-item mx-auto" data-toggle="modal" data-target="#weatherModal1">
+                                <div class="weather-text-large" style="padding-top: 2rem;">{{ weatherInfo.today.day }}</div>
+                                {% if weatherInfo.today.desc == "--"%}
+                                    <img class="weather-image" src="{% static 'assets/img/weatherIcons/unknown.jpg' %}" alt="weather icon" />
+                                {% endif %}
+                                {% if weatherInfo.today.desc == "clear sky"%}
+                                    <img class="weather-image" src="{% static 'assets/img/weatherIcons/sunny.jpg' %}" alt="weather icon" />
+                                {% endif %}
+                                {% if weatherInfo.today.desc == "overcast clouds"%}
+                                    <img class="weather-image" src="{% static 'assets/img/weatherIcons/overcast.jpg' %}" alt="weather icon" />
+                                {% endif %}
+                                {% if weatherInfo.today.desc == "light rain"%}
+                                    <img class="weather-image" src="{% static 'assets/img/weatherIcons/light_rain.jpg' %}" alt="weather icon" />
+                                {% endif %}
+                                {% if weatherInfo.today.desc == "moderate rain"%}
+                                    <img class="weather-image" src="{% static 'assets/img/weatherIcons/rainy.jpg' %}" alt="weather icon" />
+                                {% endif %}
+                                {% if weatherInfo.today.desc == "few clouds"%}
+                                    <img class="weather-image" src="{% static 'assets/img/weatherIcons/partly_cloudy.jpg' %}" alt="weather icon" />
+                                {% endif %}
+                                {% if weatherInfo.today.desc == "scattered clouds"%}
+                                    <img class="weather-image src=" src="{% static 'assets/img/weatherIcons/partly_cloudy.jpg' %}" alt="weather icon" />
+                                {% endif %}
+                                {% if weatherInfo.today.desc == "heavy intensity rain"%}
+                                    <img class="weather-image src=" src="{% static 'assets/img/weatherIcons/heavy_rain.jpg' %}" alt="weather icon" />
+                                {% endif %}
+                                <!--div class="weather-item-caption text-center text-black" style = "font-size: 1.5em; padding-top: 6rem; padding-left: 4rem; padding-bottom:6rem; background-color: white;">{{ weatherInfo.today.desc }}</div-->
+                                <div class="weather-text-large" style="font-weight: 400; font-size: 2.5em;">{{ weatherInfo.today.F }} &#8457;</div>
+                                <div class="text-center" style="font-weight:900; font-size: .9em; color: rgb(124, 149, 187)">H: {{ weatherInfo.today.max }}&#730; &nbsp &nbsp L: {{ weatherInfo.today.min }}&#730;</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Weather Grid Items-->
+                    <div class="">
+                        <div class="weather-box-small">
+                            <div class="weather-item mx-auto" data-toggle="modal" data-target="#weatherModal1">
+                                <div class="weather-text-small" style="padding-top: 2rem;">{{ weatherInfo.today.day }}</div>
+                                
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -139,7 +173,6 @@
                         <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
                         <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
                         <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
                     </div>
                     <!-- Footer About Text-->
                     <div class="col-lg-4">
