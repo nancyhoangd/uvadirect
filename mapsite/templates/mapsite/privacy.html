@@ -4,22 +4,22 @@
 <html lang="en">
     <h2>Privacy Settings</h2>
         <p>
-            In order to use UVA Direct's find my friend feature, we need your permission to share your location with others.
+            In order to use UVA Direct's Friends Schedule feature, we need your permission to share your schedule with friends.
         </p>
 
         <p>
             <h3>
                 Current Location Settings:
             </h3>
-                {% if user.profile.location_sharing == False %}
+                {% if user.profile.schedule_sharing == False %}
                     <p>
-                        Location sharing with friends is turned off.
+                        Schedule sharing with friends is turned off.
                     </p>
 
                 {% endif %}
-                {% if user.profile.location_sharing == True %}
+                {% if user.profile.schedule_sharing == True %}
                     <p>
-                        Location sharing with friends is turned on. You're all set to use UVA Direct's find friends feature.
+                        Schedule sharing with friends is turned on.
                     </p>
 
                 {% endif %}
@@ -27,7 +27,7 @@
 
         <p>
             <h3>
-                Change Location Settings:
+                Change Schedule Sharing Settings:
             </h3>
             <form action='/profile_page/privacy/' method="post">
                 {% csrf_token %}

@@ -11,6 +11,9 @@ from django.core.exceptions import ObjectDoesNotExist
 def profile_view(request):
     return render(request, 'mapsite/profile_view.html/')
 
+def friends_schedule(request):
+    return render(request, 'mapsite/friends_schedules.html/')
+
 def edit_info(request): 
     if request.method == 'POST':
         classesToBeDeleted = request.POST.getlist('class[]')
@@ -27,11 +30,10 @@ def privacy(request):
         form = PrivacyForm(request.POST)
         if form.is_valid():
             privacy = form.cleaned_data['allow']
-            print(privacy)
             if privacy == "True":
-                request.user.profile.location_sharing = True
+                request.user.profile.schedule_sharing = True
             else:
-                request.user.profile.location_sharing = False
+                request.user.profile.schedule_sharing = False
             request.user.profile.save()
         return HttpResponseRedirect('/profile_page/privacy/')
     else:
@@ -79,9 +81,9 @@ def add_friend(request):
                     friend_object.save()
                     request.user.save() 
                 except IntegrityError: 
-                    return HttpResponse("Already sent a friend request to " + friend_object.username)
+                    return render(request, 'mapsite/request_exists.html/')
             except ObjectDoesNotExist: 
-                return HttpResponse("Account with username does not exist, try again")
+                return render(request, 'mapsite/invalid_request.html/')
             return HttpResponseRedirect('/profile_page/friends/')
     else:
         form = FriendForm()
@@ -104,6 +106,7 @@ def accept_or_decline_request(request):
             currentFriendRequest = FriendRequest.objects.get(from_user = currentRequestUsername, to_user = request.user.username)
             request.user.profile.friends_requests.remove(currentFriendRequest)
             friend_profile.profile.friends_requests.remove(currentFriendRequest)
+            currentFriendRequest.delete()
             # FriendRequest.objects.remove(currentFriendRequest)
             request.user.profile.friends.add(friend_profile.profile)
             friend_profile.profile.friends.add(request.user.profile)

@@ -20,7 +20,7 @@ class FriendForm(forms.Form):
 
 class PrivacyForm(forms.Form):
     CHOICES = (
-        (True, "Allow location sharing with friends"),
-        (False, "Do not allow location sharing with friends")
+        (True, "Allow schedule sharing with friends"),
+        (False, "Do not allow schedule sharing with friends")
     )
-    allow = forms.ChoiceField(label = 'Allow location sharing with friends?', choices = CHOICES)
+    allow = forms.ChoiceField(label = 'Allow schedule sharing with friends?', choices = CHOICES)
