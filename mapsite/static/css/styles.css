@@ -547,7 +547,7 @@ pre code {
 .container-md,
 .container-sm {
   width: 100%;
-  padding-right: 1.5rem;
+  padding-right: 0rem;
   padding-left: 1.0rem;
   margin-right: auto;
   margin-left: auto;
@@ -10129,6 +10129,12 @@ h3 {
 .masthead .masthead-avatar {
   width: 15rem;
 }
+.masthead-background {
+  background-image: url("../assets/img/title_students.png");
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 700px 520px
+}
 
 @media (min-width: 992px) {
   .masthead {
@@ -10146,20 +10152,25 @@ h3 {
 .weather-image {
   width:100px;
   height:100px;
-  margin-left: 100px;
-  margin-right: 100px;
-  margin-top: 2rem;
-  margin-bottom: 1.5rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 .weather-box {
-  width: 320px;
-  height: 300px;
+  float:left; 
+  width: 110%;
+  height: 295px;
   background-color: white;
   border-radius: 25px;
 }
 .weather-box-small {
-  width: 150px;
-  height: 170px;
+  float:left; 
+  height: 130px;
+  width: 14%;
+  margin-left: 0.5rem;
+  padding-top: 0.5rem;
   background-color: white;
   border-radius: 25px;
 }
@@ -10176,7 +10187,7 @@ h3 {
 }
 .weather-text-small {
   font-size: 1.3rem;
-  line-height: 2rem;
+  line-height: 1rem;
   text-align: center;
 }
 .weather .weather-item {
@@ -10222,7 +10233,16 @@ h3 {
   color: #1abc9c;
   opacity: 1;
 }
-
+.friend-box {
+  float:left; 
+  background:Red;
+  text-align: center;
+  padding: 5rem;
+  border-radius: 25px;
+  width:25%;
+  height:280px;
+  margin-left: 1rem;
+}
 .floating-label-form-group {
   position: relative;
   border-bottom: 1px solid #e9ecef;

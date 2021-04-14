@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         {% load static %}
+        {% get_static_prefix as STATIC_PREFIX %}
         <!-- {% load mathfilters %} -->
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -19,8 +20,6 @@
         <!-- Map API -->
         <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
         <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet'/>
-        <!-- Weather Parsing -->
-        <script src="{% static 'js/weather_script.js' %}"></script>
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -46,15 +45,15 @@
                             href="../profile_page/friends">Friends</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
                             href="#about">About</a></li>
-</ul>
+                    </ul>
                 </div>
             </div>
         </nav>
         <!-- Masthead-->
-        <header class="masthead text-black text-center" style="background-color: rgb(221, 238, 252); padding-top: calc(3rem + 80px); padding-bottom: 4rem;">
+        <header class="masthead text-black text-center masthead-background" style="background-color: rgb(221, 238, 252); padding-top: calc(3rem + 80px); padding-bottom: 4rem;">
             <div class="container d-flex align-items-center flex-column">  
                 <!-- UVA DIRECT Logo - Aspect ratio of logo: 2095px x 957px or 2.189 to 1 -->
-                <img src="{% static 'assets/img/UVA_Direct_logo.png' %}" alt="UVA Direct!!" style="width: 656px;height:300px;">
+                <img src="{% static 'assets/img/UVA_Direct_logo.png' %}" alt="UVA Direct" style="width: 656px;height:300px;">
                 <!-- Masthead Heading :: No Text-->
                 <h1 class="masthead-heading text-uppercase mb-0"></h1>
                 <!-- Masthead Subheading-->
@@ -64,55 +63,44 @@
             </div>
         </header>
         <!-- Weather Section-->
-        <section class="page-section weather" id="weather" style="background-color: rgb(73, 192, 247);">
+        <section class="page-section weather" id="weather" style="background-color: rgb(73, 192, 247); height: 500px;">
             <div class="container">
                 <!-- Weather Section Heading-->
                 <h2 class="page-section-heading text-left text-uppercase text-secondary mb-0">Weather</h2>
-                
-                <div class="container-weather">
+                <div class="container-weather" style="width: 25%; float: left;">
                     <!-- Weather for Today -->
-                    <div class="" style="padding-top: 3rem;">
-                        <div class="weather-box">
-                            <div class="weather-item mx-auto" data-toggle="modal" data-target="#weatherModal1">
-                                <div class="weather-text-large" style="padding-top: 2rem;">{{ weatherInfo.today.day }}</div>
-                                {% if weatherInfo.today.desc == "--"%}
-                                    <img class="weather-image" src="{% static 'assets/img/weatherIcons/unknown.jpg' %}" alt="weather icon" />
-                                {% endif %}
-                                {% if weatherInfo.today.desc == "clear sky"%}
-                                    <img class="weather-image" src="{% static 'assets/img/weatherIcons/sunny.jpg' %}" alt="weather icon" />
-                                {% endif %}
-                                {% if weatherInfo.today.desc == "overcast clouds"%}
-                                    <img class="weather-image" src="{% static 'assets/img/weatherIcons/overcast.jpg' %}" alt="weather icon" />
-                                {% endif %}
-                                {% if weatherInfo.today.desc == "light rain"%}
-                                    <img class="weather-image" src="{% static 'assets/img/weatherIcons/light_rain.jpg' %}" alt="weather icon" />
-                                {% endif %}
-                                {% if weatherInfo.today.desc == "moderate rain"%}
-                                    <img class="weather-image" src="{% static 'assets/img/weatherIcons/rainy.jpg' %}" alt="weather icon" />
-                                {% endif %}
-                                {% if weatherInfo.today.desc == "few clouds"%}
-                                    <img class="weather-image" src="{% static 'assets/img/weatherIcons/partly_cloudy.jpg' %}" alt="weather icon" />
-                                {% endif %}
-                                {% if weatherInfo.today.desc == "scattered clouds"%}
-                                    <img class="weather-image src=" src="{% static 'assets/img/weatherIcons/partly_cloudy.jpg' %}" alt="weather icon" />
-                                {% endif %}
-                                {% if weatherInfo.today.desc == "heavy intensity rain"%}
-                                    <img class="weather-image src=" src="{% static 'assets/img/weatherIcons/heavy_rain.jpg' %}" alt="weather icon" />
-                                {% endif %}
-                                <!--div class="weather-item-caption text-center text-black" style = "font-size: 1.5em; padding-top: 6rem; padding-left: 4rem; padding-bottom:6rem; background-color: white;">{{ weatherInfo.today.desc }}</div-->
-                                <div class="weather-text-large" style="font-weight: 400; font-size: 2.5em;">{{ weatherInfo.today.F }} &#8457;</div>
-                                <div class="text-center" style="font-weight:900; font-size: .9em; color: rgb(124, 149, 187)">H: {{ weatherInfo.today.max }}&#730; &nbsp &nbsp L: {{ weatherInfo.today.min }}&#730;</div>
-                            </div>
-                        </div>
+                    <div class="weather-text-large" style="text-align: left; margin-left: 1rem; margin-bottom: 0.5rem; margin-top: 1rem;">Today</div>
+                    <div class="weather-box" id="weatherBOXC">
+                        <div class="weather-text-large" style="padding-top: 1rem; font-size: 2rem;">{{ weatherInfo.today.weekday }}</div>
+                        <div class="weather-text-large" style="padding-top: 0rem; font-size: 1.5rem; color:rgb(104, 123, 151)">{{ weatherInfo.today.date }}</div>
+                        <!--div class="weather-text-small">{{ weatherInfo.today.desc }}</div-->
+                        <div class="weather-text-large" style="font-weight: 400; font-size: 2.5em;">{{ weatherInfo.today.F }}&#8457;</div>
+                        <div class="text-center" style="font-weight:900; font-size: .9em; color: rgb(124, 149, 187)">H: {{ weatherInfo.today.max }}&#730; &nbsp &nbsp L: {{ weatherInfo.today.min }}&#730;</div>
                     </div>
-                    <!-- Weather Grid Items-->
-                    <div class="">
-                        <div class="weather-box-small">
-                            <div class="weather-item mx-auto" data-toggle="modal" data-target="#weatherModal1">
-                                <div class="weather-text-small" style="padding-top: 2rem;">{{ weatherInfo.today.day }}</div>
-                                
+                </div>
+                <!-- Extra Weather Info -->
+                <div style="float:left; width: 74%; margin-left: 0.5rem;">
+                    <!-- Hourly Weather -->
+                    <div class="weather-text-large" style = "text-align: left; margin-left: 2rem; padding-top: 2rem; padding-bottom: 0.5rem;">Hourly Weather</div>
+                    {% for hour in weatherInfo.hours %}
+                        <div class = "weather-box-small" style = "margin-bottom: 1rem">
+                            <div class="weather-text-small" style="font-size: 1.1rem;">{{ hour.time }}</div>
+                            <!-- IMAGE HERE -->
+                            <div class="weather-text-small" style="font-size: 1.1rem;">{{ hour.temp }}&#730;</div>
                         </div>
-                    </div>
+                    {% endfor %}
+                    <!-- Daily Weather -->
+                    <div class="weather-text-large" style = "text-align: left; margin-left: 2rem; padding-bottom: 0.5rem;">Daily Weather</div>
+                    {% for day in weatherInfo.days %}
+                        <div class = "weather-box-small">
+                            <div class="weather-text-small" style="font-size: 1.1rem">{{ day.weekday }}</div>
+                            <div class="weather-text-small" style="font-weight:500; font-size: 0.9rem; color: rgb(104, 125, 156);">
+                                {{ day.date }}</div>
+                            <!-- IMAGE HERE -->
+                            <div class="weather-text-small" style="font-weight:500; font-size: 0.9rem; color: rgb(104, 125, 156);">
+                                H: {{ day.max }}&#730; &nbsp &nbsp L: {{ day.min }}&#730;</div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </section>
@@ -168,26 +156,37 @@
     </div>
 </section>
 <!-- Friends Section -->
-<section class="page-section map" id="friends" style="background-color: rgb(137, 184, 247);">
+<section class="page-section map" id="friends" style="background-color: rgb(137, 184, 247); height: 500px;">
     <div class="container">
         <!-- Friends Section Heading-->
         <a href="../profile_page/friends/">
             <h2 class="page-section-heading text-left text-uppercase text-secondary mb-0">Friends</h2>
         </a>
-            <h3>
-                Friends List:
-                {% if user.profile.friends %}
-                <ul>
-                    {% for friend in user.profile.friends.all %}
-                    <li>
-                        {{friend.profile.username}}
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% else %}
-                <p>No friends to show.</p>
-                {% endif %}
-            </h3>
+        <h3>
+            Friends List:
+            {% if user.profile.friends %}
+            <ul>
+                {% for friend in user.profile.friends.all %}
+                <li>
+                    {{friend.profile.username}}
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No friends to show.</p>
+            {% endif %}
+        </h3>
+        <h4>
+            <div class="friend-box">
+                Friend 1
+            </div>
+            <div class="friend-box">
+                Friend 2
+            </div>
+            <div class="friend-box">
+                Friend 3
+            </div>
+        </h4>
     </div>
 </section>
 <!-- About Section-->

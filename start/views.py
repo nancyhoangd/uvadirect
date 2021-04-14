@@ -20,7 +20,7 @@ def weather(request):
     try:
         api_response = requests.get(link_url)
         api_response_json = json.loads(api_response.content)
-        dayInfo = parseResponse(api_response_json)
+        dayInfo = parseWeatherResponse(api_response_json)
     except ConnectionError:
         dayInfo = {
             "today" : {
@@ -31,6 +31,7 @@ def weather(request):
                 "max": "--",
                 "sky": "--",
                 "desc": "--",
+                "img": getImgURL("--")
             }
         }
         for i in range(6):
@@ -40,36 +41,52 @@ def weather(request):
                 "C": "--",
                 "sky": "--",
                 "desc": "--",
+                "img": getImgURL("--")
             }
     return dayInfo
 
     
         
 
-def parseResponse(api_response_json):
+def parseWeatherResponse(api_response_json):
     today = api_response_json["daily"][0]
+    date = dtToDate(today["dt"], True)
     todayInfo = {
-        "day": dtToDate(today["dt"], True),
-        "F": round((today["temp"]["day"]-273.15)*9/5+32, 2),
-        "C": round((today["temp"]["day"]-273.15), 2),
-        "min": round((today["temp"]["min"]-273.15)*9/5+32, 2),
-        "max": round((today["temp"]["max"]-273.15)*9/5+32, 2),
+        "weekday" : date[0],
+        "date": date[1],
+        "F": round((today["temp"]["day"]-273.15)*9/5+32),
+        "C": round((today["temp"]["day"]-273.15)),
+        "min": round((today["temp"]["min"]-273.15)*9/5+32),
+        "max": round((today["temp"]["max"]-273.15)*9/5+32),
         "sky": today["weather"][0]["main"],
-        "desc": today["weather"][0]["description"]
+        "desc": today["weather"][0]["description"],
+        "img": getImgURL(today["weather"][0]["description"])
     }
-    days = {
-        "today" : todayInfo
-    }
+    print(todayInfo["img"])
+    days=[]
     for i in range(6):
         nextDay = api_response_json["daily"][i+1]
-        days["day"+str(i+1)] = {
-            "day": dtToDate(nextDay["dt"]),
-            "F": round((nextDay["temp"]["day"]-273.15)*9/5+32, 2),
-            "C": round((nextDay["temp"]["day"]-273.15), 2),
+        date = dtToDate(nextDay["dt"])
+        days.append({
+            "weekday" : date[0],
+            "date": date[1],
+            "max": round((nextDay["temp"]["max"]-273.15)*9/5+32),
+            "min": round((nextDay["temp"]["min"]-273.15)*9/5+32),
             "sky": nextDay["weather"][0]["main"],
-            "desc": nextDay["weather"][0]["description"]
-        }
-    return days
+            "desc": nextDay["weather"][0]["description"],
+            "img": getImgURL(nextDay["weather"][0]["description"])
+        })
+    hours=[]
+    for i in range(6):
+        hour = api_response_json["hourly"][i+1]
+        hours.append({
+            "time" : datetime.utcfromtimestamp(int(hour["dt"])).strftime('%I:%M%p').strip("0"),
+            "temp" : round((hour["temp"]-273.15)*9/5+32),
+            "desc" : hour["weather"][0]["description"],
+            "img": getImgURL(hour["weather"][0]["description"])
+        })
+    return { "today" : todayInfo, "days" : days, "hours" : hours }
+
 def dtToDate(dt, includeYear=False):
     months = {
         1 : "Jan",
@@ -85,12 +102,12 @@ def dtToDate(dt, includeYear=False):
         11 : "Nov",
         12 : "Dec"
     }
-    info = datetime.utcfromtimestamp(int(dt)).strftime('%m %d %Y').split(" ")
+    info = datetime.utcfromtimestamp(int(dt)).strftime('%m %d %Y %A').split(" ")
     month = months[int(info[0])]
     day = "st"
     if(info[1][-1] == "2" and info[1] != "12"):
         day = "nd"
-    elif(info[1][-1] == "3"):
+    elif(info[1][-1] == "3" and info[1] != "13"):
         day = "rd"
     elif(info[1][-1] != "1" or info[1] == "11"):
         day = "th"
@@ -100,9 +117,25 @@ def dtToDate(dt, includeYear=False):
         info[2] = ", " + info[2]
     else:
         info[2] = ""
-    return month + " " + info[1]+day + info[2]
+    return (info[3], month + " " + info[1]+day + info[2])
 
-    
+def getImgURL(weatherDescription):
+    prefix = ""#"{% static \'assets/img/weatherIcons/"
+    suffix = ""#"\' %}"
+    if(weatherDescription == "--"):
+        return prefix + "unknown.jpg" + suffix
+    elif(weatherDescription == "clear sky"):
+        return prefix + "sunny.jpg" + suffix
+    elif(weatherDescription == "overcast clouds"):
+        return prefix + "overcast.jpg" + suffix
+    elif(weatherDescription == "light rain"):
+        return prefix + "light_rain.jpg" + suffix
+    elif(weatherDescription == "moderate rain"):
+        return prefix + "rainy.jpg" + suffix
+    elif(weatherDescription == "few clouds" or weatherDescription == "scattered clouds" or weatherDescription == "broken clouds"):
+        return prefix + "partly_cloudy.jpg" + suffix
+    elif(weatherDescription == "heavy intensity rain"):
+        return prefix + "heavy_rain.jpg" + suffix
 def home(request):
     return HttpResponse("Hello, world. You're at the Grounds Map Start home.")
 
