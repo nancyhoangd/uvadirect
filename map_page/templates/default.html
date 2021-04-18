@@ -74,22 +74,7 @@
             'top-left'
           );
         </script>
-        <h3>
-          Here are your current classes! To go from one location to another, plug in your starting location and ending location! 
-          You can see your current location if you have location services on. Click the compass on the top right of the map and it will center in on where you are. 
-          {% if user.profile.classes %}
-          <ul>
-          {% for class in user.profile.classes.all %}
-              <li>
-                  {{class.class_name}} at {{class.time}} on {{class.days}}
-                  in {{class.building}} {{class.building_number}}
-              </li>
-          {% endfor %}
-          </ul>
-          {% else %}
-              <p>No classes to show.</p>
-          {% endif %}
-        </h3>
+        
       </div>
    </div>
   </body>
