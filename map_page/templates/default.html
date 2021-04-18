@@ -47,8 +47,9 @@
     <!-- MAP DISPLAY -->
     <div style = "height:550px; padding-top: 6rem;">
       <a href = ".">
-        <h1 class="page-section-heading text-left text-uppercase text-secondary mb-0" style="padding-top: 1rem; margin-left: 3rem;">Map</h1>
+        <h1 class="page-section-heading text-left text-uppercase text-secondary mb-0" style="padding-top: 1rem; margin-left: 3rem;">Map of Grounds!</h1>
       </a>
+      <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
       <div id='map' style='margin-left: 3rem; margin-right: 3rem; height: 360px; padding-top: 1rem'>
         <script>
           mapboxgl.accessToken = 'pk.eyJ1IjoibWFwcHJvamVjdDMyNDAiLCJhIjoiY2ttdHBzMWJuMGYwcjJ2cGRxaXVhaWtvMCJ9.xH-3a-x9qOF11YWF08rM6Q';
@@ -66,6 +67,12 @@
                     trackUserLocation: true
                     })
                     );
+          map.addControl(
+            new MapboxDirections({
+              accessToken: mapboxgl.accessToken
+            }),
+            'top-left'
+          );
         </script>
       </div>
    </div>
