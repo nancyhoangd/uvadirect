@@ -80,5 +80,24 @@
         
       </div>
    </div>
+
+   <!-- Schedule Section -->
+  <div style='margin-left: 3rem; margin-right: 3rem; height: 360px; padding-top: 1rem'>
+        <h3>
+            Schedule:
+            {% if user.profile.classes %}
+            <ul>
+                {% for class in user.profile.classes.all %}
+                <li>
+                    {{class.class_name}} at {{class.time}} on {{class.days}}
+                    in {{class.building}} {{class.building_number}}
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No classes to show.</p>
+            {% endif %}
+        </h3>
+  </div>
   </body>
 </html>
