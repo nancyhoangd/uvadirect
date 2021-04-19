@@ -74,6 +74,27 @@
                         <div class="weather-text-large" style="padding-top: 1rem; font-size: 2rem;">{{ weatherInfo.today.weekday }}</div>
                         <div class="weather-text-large" style="padding-top: 0rem; font-size: 1.5rem; color:rgb(104, 123, 151)">{{ weatherInfo.today.date }}</div>
                         <!--div class="weather-text-small">{{ weatherInfo.today.desc }}</div-->
+                        {% if weatherInfo.today.desc == "--" %}
+                        <img src="{% static 'assets/img/weatherIcons/unknown.jpg' %}" alt="unknown" class = "weather-image">
+                        {% endif %}
+                        {% if weatherInfo.today.desc == "clear sky" %}
+                        <img src="{% static 'assets/img/weatherIcons/sunny.jpg' %}" alt="sunny" class = "weather-image">
+                        {% endif %}
+                        {% if weatherInfo.today.desc == "overcast clouds" %}
+                        <img src="{% static 'assets/img/weatherIcons/overcast.jpg' %}" alt="overcast" class = "weather-image">
+                        {% endif %}
+                        {% if weatherInfo.today.desc == "light rain" %}
+                        <img src="{% static 'assets/img/weatherIcons/light_rain.jpg' %}" alt="light rain" class = "weather-image">
+                        {% endif %}
+                        {% if weatherInfo.today.desc == "moderate rain" %}
+                        <img src="{% static 'assets/img/weatherIcons/rainy.jpg' %}" alt="rainy" class = "weather-image">
+                        {% endif %}
+                        {% if weatherInfo.today.desc == "few clouds" or weatherInfo.today.desc == "scattered clouds" or weatherInfo.today.desc == "broken clouds" %}
+                        <img src="{% static 'assets/img/weatherIcons/partly_cloudy.jpg' %}" alt="partly cloudy" class = "weather-image">
+                        {% endif %}
+                        {% if weatherInfo.today.desc == "few clouds" or weatherInfo.today.desc == "heavy intensity rain" %}
+                        <img src="{% static 'assets/img/weatherIcons/heavy_rain.jpg' %}" alt="heavy rain" class = "weather-image">
+                        {% endif %}
                         <div class="weather-text-large" style="font-weight: 400; font-size: 2.5em;">{{ weatherInfo.today.F }}&#8457;</div>
                         <div class="text-center" style="font-weight:900; font-size: .9em; color: rgb(124, 149, 187)">H: {{ weatherInfo.today.max }}&#730; &nbsp &nbsp L: {{ weatherInfo.today.min }}&#730;</div>
                     </div>
@@ -84,9 +105,29 @@
                     <div class="weather-text-large" style = "text-align: left; margin-left: 2rem; padding-top: 2rem; padding-bottom: 0.5rem;">Hourly Weather</div>
                     {% for hour in weatherInfo.hours %}
                         <div class = "weather-box-small" style = "margin-bottom: 1rem">
-                            <div class="weather-text-small" style="font-size: 1.1rem;">{{ hour.time }}</div>
-                            <!-- IMAGE HERE -->
-                            <div class="weather-text-small" style="font-size: 1.1rem;">{{ hour.temp }}&#730;</div>
+                        <div class="weather-text-small" style="font-size: 1.1rem;">{{ hour.time }}</div>
+                            {% if hour.desc == "--" %}
+                            <img src="{% static 'assets/img/weatherIcons/unknown.jpg' %}" alt="unknown" class = "weather-image-small">
+                            {% endif %}
+                            {% if hour.desc == "clear sky" %}
+                            <img src="{% static 'assets/img/weatherIcons/sunny.jpg' %}" alt="sunny" class = "weather-image-small">
+                            {% endif %}
+                            {% if hour.desc == "overcast clouds" %}
+                            <img src="{% static 'assets/img/weatherIcons/overcast.jpg' %}" alt="overcast" class = "weather-image-small">
+                            {% endif %}
+                            {% if hour.desc == "light rain" %}
+                            <img src="{% static 'assets/img/weatherIcons/light_rain.jpg' %}" alt="light rain" class = "weather-image-small">
+                            {% endif %}
+                            {% if hour.desc == "moderate rain" %}
+                            <img src="{% static 'assets/img/weatherIcons/rainy.jpg' %}" alt="rainy" class = "weather-image-small">
+                            {% endif %}
+                            {% if hour.desc == "few clouds" or hour.desc == "scattered clouds" or hour.desc == "broken clouds" %}
+                            <img src="{% static 'assets/img/weatherIcons/partly_cloudy.jpg' %}" alt="partly cloudy" class = "weather-image-small">
+                            {% endif %}
+                            {% if hour.desc == "heavy intensity rain" %}
+                            <img src="{% static 'assets/img/weatherIcons/heavy_rain.jpg' %}" alt="heavy rain" class = "weather-image-small">
+                            {% endif %}
+                            <div class="weather-text-small" style="font-size: 1.1rem;">{{ hour.temp }}&#8457;</div>
                         </div>
                     {% endfor %}
                     <!-- Daily Weather -->
@@ -96,7 +137,27 @@
                             <div class="weather-text-small" style="font-size: 1.1rem">{{ day.weekday }}</div>
                             <div class="weather-text-small" style="font-weight:500; font-size: 0.9rem; color: rgb(104, 125, 156);">
                                 {{ day.date }}</div>
-                            <!-- IMAGE HERE -->
+                                {% if day.desc == "--" %}
+                                <img src="{% static 'assets/img/weatherIcons/unknown.jpg' %}" alt="unknown" class = "weather-image-smaller">
+                                {% endif %}
+                                {% if day.desc == "clear sky" %}
+                                <img src="{% static 'assets/img/weatherIcons/sunny.jpg' %}" alt="sunny" class = "weather-image-smaller">
+                                {% endif %}
+                                {% if day.desc == "overcast clouds" %}
+                                <img src="{% static 'assets/img/weatherIcons/overcast.jpg' %}" alt="overcast" class = "weather-image-smaller">
+                                {% endif %}
+                                {% if day.desc == "light rain" %}
+                                <img src="{% static 'assets/img/weatherIcons/light_rain.jpg' %}" alt="light rain" class = "weather-image-smaller">
+                                {% endif %}
+                                {% if day.desc == "moderate rain" %}
+                                <img src="{% static 'assets/img/weatherIcons/rainy.jpg' %}" alt="rainy" class = "weather-image-smaller">
+                                {% endif %}
+                                {% if day.desc == "few clouds" or day.desc == "scattered clouds" or day.desc == "broken clouds" %}
+                                <img src="{% static 'assets/img/weatherIcons/partly_cloudy.jpg' %}" alt="partly cloudy" class = "weather-image-smaller">
+                                {% endif %}
+                                {% if day.desc == "heavy intensity rain" %}
+                                <img src="{% static 'assets/img/weatherIcons/heavy_rain.jpg' %}" alt="heavy rain" class = "weather-image-smaller">
+                                {% endif %}
                             <div class="weather-text-small" style="font-weight:500; font-size: 0.9rem; color: rgb(104, 125, 156);">
                                 H: {{ day.max }}&#730; &nbsp &nbsp L: {{ day.min }}&#730;</div>
                         </div>

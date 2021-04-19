@@ -80,7 +80,7 @@ def parseWeatherResponse(api_response_json):
     for i in range(6):
         hour = api_response_json["hourly"][i+1]
         hours.append({
-            "time" : datetime.utcfromtimestamp(int(hour["dt"])).strftime('%I:%M%p').strip("0"),
+            "time" : datetime.utcfromtimestamp(int(hour["dt"])-4*3600).strftime('%I:%M%p').strip("0"),
             "temp" : round((hour["temp"]-273.15)*9/5+32),
             "desc" : hour["weather"][0]["description"],
             "img": getImgURL(hour["weather"][0]["description"])
@@ -88,6 +88,7 @@ def parseWeatherResponse(api_response_json):
     return { "today" : todayInfo, "days" : days, "hours" : hours }
 
 def dtToDate(dt, includeYear=False):
+    dt = int(dt)-4*3600
     months = {
         1 : "Jan",
         2 : "Feb",
@@ -117,6 +118,7 @@ def dtToDate(dt, includeYear=False):
         info[2] = ", " + info[2]
     else:
         info[2] = ""
+    print(info)
     return (info[3], month + " " + info[1]+day + info[2])
 
 def getImgURL(weatherDescription):

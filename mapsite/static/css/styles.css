@@ -10158,6 +10158,24 @@ h3 {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+.weather-image-small {
+  width:80px;
+  height:80px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+}
+.weather-image-smaller {
+  width:65px;
+  height:65px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+}
 .weather-box {
   float:left; 
   width: 110%;
