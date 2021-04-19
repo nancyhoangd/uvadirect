@@ -2,24 +2,68 @@
 {% load socialaccount %}
 
 <html lang="en">
+    <head> 
+        {% load socialaccount %}
+        {% load static %}
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>UVA Direct - Map</title>
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" >
+        <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />}
+    </head>
+
+            <!-- Navigation-->
+            <nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav" style="background-color: rgb(46, 75, 168);">
+                <div class="container">
+                    <a class="navbar-brand js-scroll-trigger" href="../../start">
+                        <!-- compact UVA Logo : aspect ratio 735 x 358 or 2.05 to 1-->
+                        <img src="{% static 'assets/img/UVA_Direct_compact.png' %}" style="width: 80;height:40px;" alt="UVA Direct"/>
+                    </a>
+                    <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                        Menu
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../start#weather">Weather</a></li>
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../map_page/default">Map</a></li>
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../profile_page/schedule">Schedule</a></li>
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../profile_page/friends">Friends</a></li>
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../friends_schedule">Friends Schedule</a></li>
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../privacy">Privacy</a></li>
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../start#about">About</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
     <h2>Privacy Settings</h2>
         <p>
-            In order to use UVA Direct's find my friend feature, we need your permission to share your location with others.
+            In order to use UVA Direct's Friends Schedule feature, we need your permission to share your schedule with friends.
         </p>
 
         <p>
             <h3>
                 Current Location Settings:
             </h3>
-                {% if user.profile.location_sharing == False %}
+                {% if user.profile.schedule_sharing == False %}
                     <p>
-                        Location sharing with friends is turned off.
+                        Schedule sharing with friends is turned off.
                     </p>
 
                 {% endif %}
-                {% if user.profile.location_sharing == True %}
+                {% if user.profile.schedule_sharing == True %}
                     <p>
-                        Location sharing with friends is turned on. You're all set to use UVA Direct's find friends feature.
+                        Schedule sharing with friends is turned on.
                     </p>
 
                 {% endif %}
@@ -27,7 +71,7 @@
 
         <p>
             <h3>
-                Change Location Settings:
+                Change Schedule Sharing Settings:
             </h3>
             <form action='/profile_page/privacy/' method="post">
                 {% csrf_token %}

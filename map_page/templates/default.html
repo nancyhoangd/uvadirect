@@ -15,8 +15,8 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" >
     <!-- Map API -->
-    <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
   </head>
   <body style="background-color: rgb(27, 168, 168);">
     <!-- Navigation-->
@@ -36,6 +36,8 @@
                   <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="">Map</a></li>
                   <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../profile_page/schedule">Schedule</a></li>
                   <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../profile_page/friends">Friends</a></li>
+                  <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../profile_page/friends_schedule">Friends Schedule</a></li>
+                  <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../profile_page/privacy">Privacy</a></li>
                   <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../start#about">About</a></li>
               </ul>
           </div>
@@ -45,14 +47,18 @@
     <!-- MAP DISPLAY -->
     <div style = "height:550px; padding-top: 6rem;">
       <a href = ".">
-        <h1 class="page-section-heading text-left text-uppercase text-secondary mb-0" style="padding-top: 1rem; margin-left: 3rem;">Map</h1>
+        <h1 class="page-section-heading text-left text-uppercase text-secondary mb-0" style="padding-top: 1rem; margin-left: 3rem;">Map of Grounds!</h1>
       </a>
+      <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+      <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" type="text/css">
+      <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
+      <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
       <div id='map' style='margin-left: 3rem; margin-right: 3rem; height: 360px; padding-top: 1rem'>
         <script>
           mapboxgl.accessToken = 'pk.eyJ1IjoibWFwcHJvamVjdDMyNDAiLCJhIjoiY2ttdHBzMWJuMGYwcjJ2cGRxaXVhaWtvMCJ9.xH-3a-x9qOF11YWF08rM6Q';
           var map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v10',
+            style: 'mapbox://styles/mapbox/streets-v11',
             center: [-78.509, 38.0338],
             zoom: 14.5
           });
@@ -64,8 +70,34 @@
                     trackUserLocation: true
                     })
                     );
+          map.addControl(
+            new MapboxDirections({
+              accessToken: mapboxgl.accessToken
+            }),
+            'top-left'
+          );
         </script>
+        
       </div>
    </div>
+
+   <!-- Schedule Section -->
+  <div style='margin-left: 3rem; margin-right: 3rem; height: 360px; padding-top: 1rem'>
+        <h3>
+            Schedule:
+            {% if user.profile.classes %}
+            <ul>
+                {% for class in user.profile.classes.all %}
+                <li>
+                    {{class.class_name}} at {{class.time}} on {{class.days}}
+                    in {{class.building}} {{class.building_number}}
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No classes to show.</p>
+            {% endif %}
+        </h3>
+  </div>
   </body>
 </html>
