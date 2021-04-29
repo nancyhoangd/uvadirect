@@ -14,7 +14,7 @@
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 </head>
 <body id="page-top">
-<nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav" style="background-color: rgb(46, 75, 168);">
+<nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav" style="background-color: rgb(46, 75, 168); height: 80px;">
     <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="">
             <!-- compact UVA Logo : aspect ratio 735 x 358 or 2.05 to 1-->
@@ -25,13 +25,11 @@
 </nav>
 <header class="masthead text-black text-center masthead-background" style="background-color: rgb(221, 238, 252); padding-top: calc(3rem + 80px); padding-bottom: 4rem; height: 100%;">
     <div class="container d-flex align-items-center flex-column">  
+        <h1 class="page-section-heading text-center text-uppercase text-secondary mb-0" style="padding-bottom: 0rem;">Welcome to</h1>
         <!-- UVA DIRECT Logo - Aspect ratio of logo: 2095px x 957px or 2.189 to 1 -->
         <img src="{% static 'assets/img/UVA_Direct_logo.png' %}" alt="UVA Direct" style="width: 492px;height:225px;">
         <!-- Masthead Heading :: No Text-->
-        <h1 class="masthead-heading text-uppercase mb-0"></h1>
-        <!-- Masthead Subheading-->
-        <h1 class="masthead-subheading font-weight-light mb-0" style="font-weight: bold;">Welcome!</h1>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" style="margin-top: 1rem;">
             {% if user.is_authenticated %}
             <meta http-equiv="REFRESH" content="0;url=/start/">
              <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Welcome, {{ user.profile }}!</h2>
@@ -44,7 +42,7 @@
             </div>
             {% endif %}
         </div>
-        <a style="font-weight: 500; font-size: 1rem; padding-top: 1rem; vertical-align: bottom;" href="/start">
+        <a style="font-weight: 500; font-size: 1rem; padding-top:0.3rem; vertical-align: bottom;" href="/start">
             continue to UVA Direct home site
         </a>
     </div>
