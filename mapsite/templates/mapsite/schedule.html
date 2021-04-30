@@ -51,10 +51,10 @@
         <h2 class="page-section-heading text-left text-uppercase text-secondary mb-0" style="padding-top: 6rem; padding-left: 2rem;  padding-bottom: 1rem;">Schedule</h2>
         <div class="align-items-center" style="background-color:rgb(138, 154, 209); width:100%; padding: 3rem;">
             {% if user.is_authenticated %}
-                <h3>
+                <div style="width:2000px; max-width: 100%; overflow-x: hidden;">
                     {% if user.profile.classes %}
                         {% for class in user.profile.classes.all %}
-                            <div class="schedule-box" style="background-color: white; width:2000px; max-width: 100%; overflow-x: hidden;">
+                            <div class="schedule-box" style="background-color: white;">
                                 <div class="weather-text-large" style="padding-top: 1rem; font-size: 1.5rem;">
                                     {{ class.class_name }}
                                 </div>
@@ -79,7 +79,7 @@
                             <div class="schedule-box"></div>
                         </div>
                     {% endif %}
-                </h3>
+                </div>
                 <button class="open-button" onclick="openAddForm()">Add Class</button>
                 <div class="form-popup" id="addClass">
                     <form action='/profile_page/schedule/' method="post" class="form-container">
@@ -88,7 +88,7 @@
                         {{ form }}
                         <br>
                         <button type="submit" class="btn">submit</button>
-                        <button type="submit" class="btn cancel" onclick="closeAddForm()">Close</button>
+                        <button type="" class="btn cancel" onclick="closeAddForm()">Close</button>
                     </form>
                 </div>
                 <button class="open-button" onclick="openRemoveForm()" style="background-color: red;">Remove Class</button>
@@ -106,7 +106,7 @@
                         <p>
                             
                         <button type="submit" class="btn" value= "Delete" class="btn">delete</button>
-                        <button type="submit" class="btn cancel" onclick="closeRemoveForm()">Close</button>
+                        <button type="" class="btn cancel" onclick="closeRemoveForm()">Close</button>
                         </p>
                     </form>
                 </div>
