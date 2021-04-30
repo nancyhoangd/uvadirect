@@ -54,17 +54,17 @@
                 <h3>
                     {% if user.profile.classes %}
                         {% for class in user.profile.classes.all %}
-                            <div class="schedule-box" style="background-color: white;">
-                                <div class="weather-text-large" style="padding-top: 1rem; font-size: 2rem;">
+                            <div class="schedule-box" style="background-color: white; width:2000px; max-width: 100%; overflow-x: hidden;">
+                                <div class="weather-text-large" style="padding-top: 1rem; font-size: 1.5rem;">
                                     {{ class.class_name }}
                                 </div>
-                                <div class="weather-text-large" style="padding-top: 0rem; font-size: 1.5rem; color:rgb(104, 123, 151)">
+                                <div class="weather-text-large" style="padding-top: 0rem; font-size: 1.2rem; color:rgb(104, 123, 151)">
                                     {{ class.time }}
                                 </div>
-                                <div class="weather-text-large" style="padding-top: 0rem; font-size: 1.5rem; color:rgb(104, 123, 151)">
+                                <div class="weather-text-large" style="padding-top: 0rem; font-size: 0.8rem; color:rgb(104, 123, 151)">
                                     {{ class.days }}
                                 </div>
-                                <div class="weather-text-large" style="padding-top: 1rem; font-size: 2rem;">
+                                <div class="weather-text-large" style="padding-top: 1rem; font-size: 1.5rem;">
                                     {{class.building}} {{class.building_number}}
                                 </div>
                             </div>
