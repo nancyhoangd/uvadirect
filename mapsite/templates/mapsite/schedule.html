@@ -50,7 +50,7 @@
         <!--Build/View Schedule Information-->
         <h2 class="page-section-heading text-left text-uppercase text-secondary mb-0" style="padding-top: 6rem; padding-left: 2rem;  padding-bottom: 1rem;">Schedule</h2>
         <div class="align-items-center" style="background-color:rgb(138, 154, 209); width:100%; padding: 3rem;">
-            {% if True %}
+            {% if user.is_authenticated %}
                 <h3>
                     {% if user.profile.classes %}
                         {% for class in user.profile.classes.all %}
