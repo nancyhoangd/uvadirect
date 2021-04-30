@@ -195,49 +195,34 @@
         <a href="../profile_page/schedule/">
             <h2 class="page-section-heading text-left text-uppercase text-secondary mb-0" style="padding-bottom: 1rem;">Schedule</h2>
         </a>
-        {% if user.is_authenticated %}
-            <div style="width:2000px; max-width: 100%; overflow-x: hidden; margin-bottom: 1rem;">
-                {% if user.profile.classes %}
-                    {% for class in user.profile.classes.all %}
-                        <div class="schedule-box" style="background-color: white;">
-                            <div class="weather-text-large" style="padding-top: 1rem; font-size: 1.5rem;">
-                                {{ class.class_name }}
-                            </div>
-                            <div class="weather-text-large" style="padding-top: 0rem; font-size: 1.2rem; color:rgb(104, 123, 151)">
-                                {{ class.time }}
-                            </div>
-                            <div class="weather-text-large" style="padding-top: 0rem; font-size: 0.8rem; color:rgb(104, 123, 151)">
-                                {{ class.days }}
-                            </div>
-                            <div class="weather-text-large" style="padding-top: 1rem; font-size: 1.5rem;">
-                                {{class.building}} {{class.building_number}}
-                            </div>
+        <div style="width:2000px; max-width: 100%; overflow-x: hidden; margin-bottom: 1rem;">
+            {% if user.profile.classes %}
+                {% for class in user.profile.classes.all %}
+                    <div class="schedule-box" style="background-color: white;">
+                        <div class="weather-text-large" style="padding-top: 1rem; font-size: 1.5rem;">
+                            {{ class.class_name }}
                         </div>
-                    {% endfor %}
-                {% else %}
-                    <div style="width:2000px; max-width: 100%; overflow-x: hidden;" >
-                        <div class="schedule-box"></div>
-                        <div class="schedule-box"></div>
-                        <div class="schedule-box"></div>
-                        <div class="schedule-box"></div>
-                        <div class="schedule-box"></div>
-                        <div class="schedule-box"></div>
+                        <div class="weather-text-large" style="padding-top: 0rem; font-size: 1.2rem; color:rgb(104, 123, 151)">
+                            {{ class.time }}
+                        </div>
+                        <div class="weather-text-large" style="padding-top: 0rem; font-size: 0.8rem; color:rgb(104, 123, 151)">
+                            {{ class.days }}
+                        </div>
+                        <div class="weather-text-large" style="padding-top: 1rem; font-size: 1.5rem;">
+                            {{class.building}} {{class.building_number}}
+                        </div>
                     </div>
-                {% endif %}
-            </div>
-        {% else %}
-            <div class="align-items-center" style="text-align: center; background-color: white; border-radius: 20px; padding-left: 0.5rem; padding-right: 0.5rem; padding-top: 0.3rem; padding-bottom: 0.2rem; width: 335px;" href="{% provider_login_url 'google' %}">
-                <img src="{% static 'assets/img/Google__G__Logo.png' %}" alt="Google Logo" style="margin-bottom: 0.2rem; align-self: left; width:50px; height:50px; "/>
-                <a class="" style="font-weight: 500; font-size: 2rem; padding-top: 1rem; vertical-align: bottom;" href="{% provider_login_url 'google' %}">
-                    Log in with Google 
-                </a>
-            </div>
-            <div>
-                <p style="padding-left: 2rem; font-size: 1.2rem;">
-                    to build and view your schedule
-                </p>
-            </div>
-        {% endif %}
+                {% endfor %}
+            {% else %}
+                <div style="width:2000px; max-width: 100%; overflow-x: hidden;" >
+                    <div class="schedule-box"></div>
+                    <div class="schedule-box"></div>
+                    <div class="schedule-box"></div>
+                    <div class="schedule-box"></div>
+                    <div class="schedule-box"></div>
+                </div>
+            {% endif %}
+        </div>
     </div>
 </section>
 <!-- Friends Section -->
