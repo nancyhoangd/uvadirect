@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
-
+from django.contrib.auth.views import LogoutView
 urlpatterns = [
     path('', TemplateView.as_view(template_name="mapsite/index.html")),
     path('start/', include('start.urls')),
@@ -25,4 +25,5 @@ urlpatterns = [
     path('find_friend/', include('find_friend.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
+    path('logout', LogoutView.as_view()),
 ]

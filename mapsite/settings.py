@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'e*)ewv(j0*^dhrhv3(^cb61k^8uq9wjdhmbv%rz+z+_qbd+5#)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -146,12 +146,12 @@ AUTHENTICATION_BACKENDS = (
 SITE_ID = 2
 
 LOGIN_REDIRECT_URL = '/'
-
+LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/'
 SOCIALACCOUNT_AUTO_SIGNUP = True
 SOCIALACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_EMAIL_REQUIRED = False
-
+SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_EXTRA_ARGUMENTS={'prompt':'select_account'}
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [
