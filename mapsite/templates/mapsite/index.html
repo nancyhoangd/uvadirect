@@ -33,6 +33,7 @@
             {% if user.is_authenticated %}
             <meta http-equiv="REFRESH" content="0;url=/start/">
              <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Welcome, {{ user.profile }}!</h2>
+
             {% else %}
             <div style="background-color: white; border-radius: 20px; padding-left: 0.5rem; padding-right: 0.5rem; padding-top: 0.3rem; padding-bottom: 0.2rem;" href="{% provider_login_url 'google' %}">
                 <img src="{% static 'assets/img/Google__G__Logo.png' %}" alt="Google Logo" style="margin-bottom: 0.2rem; align-self: left; width:50px; height:50px; "/>
