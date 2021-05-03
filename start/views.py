@@ -13,7 +13,7 @@ def index_view(request):
 # for the weather tab
 def weather(request):
     link_url = \
-        "https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=minutely&appid=26d6cab8e9456aaac762ee09a57c1ca9"
+        "https://api.openweathermap.org/data/2.5/onecall?lat=38.0356&lon=-78.5034&exclude=minutely&appid=26d6cab8e9456aaac762ee09a57c1ca9"
     
     dayInfo = {}
 
