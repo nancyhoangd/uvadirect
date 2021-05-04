@@ -22,7 +22,7 @@
     </head>
     <body>
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav" style="background-color: rgb(46, 75, 168);">
+        <nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand js-scroll-trigger" href="../../start">
                     <!-- compact UVA Logo : aspect ratio 735 x 358 or 2.05 to 1-->
@@ -49,81 +49,83 @@
             </div>
         </nav>
         <!--Build/View Schedule Information-->
-        <h2 class="page-section-heading text-left text-uppercase text-secondary mb-0" style="padding-top: 6rem; padding-left: 2rem;  padding-bottom: 1rem;">Schedule</h2>
-        <div class="align-items-center" style="background-color:rgb(138, 154, 209); width:100%; padding: 3rem;">
-            {% if user.is_authenticated %}
-                <div style="width:2000px; max-width: 100%; overflow-x: hidden; margin-bottom: 1rem;">
-                    {% if user.profile.classes %}
-                        {% for class in user.profile.classes.all %}
-                            <div class="schedule-box" style="background-color: white;">
-                                <div class="weather-text-large" style="padding-top: 0.3rem; font-size: 1.5rem;">
-                                    {{ class.class_name }}
-                                </div>
-                                <div class="weather-text-large" style="padding-top: 0rem; font-size: 1.2rem; color:rgb(104, 123, 151)">
-                                    {{ class.time }}
-                                </div>
-                                <div class="weather-text-large" style="padding-top: 0rem; font-size: 0.8rem; color:rgb(104, 123, 151)">
-                                    {{ class.days }}
-                                </div>
-                                <div class="weather-text-large" style="padding-top: 0.5rem; font-size: 1.5rem;">
-                                    {{class.building}} {{class.building_number}}
-                                </div>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <div style="width:2000px; max-width: 100%; overflow-x: hidden;" >
-                            <div class="schedule-box"></div>
-                            <div class="schedule-box"></div>
-                            <div class="schedule-box"></div>
-                            <div class="schedule-box"></div>
-                            <div class="schedule-box"></div>
-                            <div class="schedule-box"></div>
-                        </div>
-                    {% endif %}
-                </div>
-                <button class="open-button" onclick="openAddForm()">Add Class</button>
-                <div class="form-popup" id="addClass">
-                    <form action='/profile_page/schedule/' method="post" class="form-container">
-                        <h1></h1>
-                        {% csrf_token %}
-                        {{ form }}
-                        <br>
-                        <button type="submit" class="btn">submit</button>
-                        <button type="" class="btn cancel" onclick="closeAddForm()">Close</button>
-                    </form>
-                </div>
-                <button class="open-button" onclick="openRemoveForm()" style="background-color: red;">Remove Class</button>
-                <div class="form-popup" id="removeClass">
-                    <form action='/profile_page/edit_info/' class="form-container" method="post" name="removeForm">
-                        {% csrf_token %}
+        <div class="" style="background-color: var(--primary); height: 100%;">
+            <h2 class="page-section-heading text-left text-uppercase mb-0" style="color: var(--secondary-bg); padding-top: 6rem; padding-left: 2rem;  padding-bottom: 1rem;">Schedule</h2>
+            <div class="align-items-center" style="background-color:rgb(138, 154, 209); width:100%; padding: 3rem;">
+                {% if user.is_authenticated %}
+                    <div style="width:2000px; max-width: 100%; overflow-x: hidden; margin-bottom: 1rem;">
                         {% if user.profile.classes %}
-                        {% for class in user.profile.classes.all %}
-                            <input type="checkbox" name="class[]" value="{{class.class_name}}">
-                            <label for="class"> {{class.class_name }}</label><br>
-                        {% endfor %}
+                            {% for class in user.profile.classes.all %}
+                                <div class="schedule-box" style="background-color: white;">
+                                    <div class="weather-text-large" style="padding-top: 0.3rem; font-size: 1.5rem;">
+                                        {{ class.class_name }}
+                                    </div>
+                                    <div class="weather-text-large" style="padding-top: 0rem; font-size: 1.2rem; color:rgb(104, 123, 151)">
+                                        {{ class.time }}
+                                    </div>
+                                    <div class="weather-text-large" style="padding-top: 0rem; font-size: 0.8rem; color:rgb(104, 123, 151)">
+                                        {{ class.days }}
+                                    </div>
+                                    <div class="weather-text-large" style="padding-top: 0.5rem; font-size: 1.5rem;">
+                                        {{class.building}} {{class.building_number}}
+                                    </div>
+                                </div>
+                            {% endfor %}
                         {% else %}
-                            <p>No classes to show.</p>
+                            <div style="width:2000px; max-width: 100%; overflow-x: hidden;" >
+                                <div class="schedule-box"></div>
+                                <div class="schedule-box"></div>
+                                <div class="schedule-box"></div>
+                                <div class="schedule-box"></div>
+                                <div class="schedule-box"></div>
+                                <div class="schedule-box"></div>
+                            </div>
                         {% endif %}
-                        <p>
-                            
-                        <button type="submit" class="btn" value= "Delete" class="btn">delete</button>
-                        <button type="" class="btn cancel" onclick="closeRemoveForm()">Close</button>
+                    </div>
+                    <button class="open-button" onclick="openAddForm()">Add Class</button>
+                    <div class="form-popup" id="addClass">
+                        <form action='/profile_page/schedule/' method="post" class="form-container">
+                            <h1></h1>
+                            {% csrf_token %}
+                            {{ form }}
+                            <br>
+                            <button type="submit" class="btn">submit</button>
+                            <button type="" class="btn cancel" onclick="closeAddForm()">Close</button>
+                        </form>
+                    </div>
+                    <button class="open-button" onclick="openRemoveForm()" style="background-color: red;">Remove Class</button>
+                    <div class="form-popup" id="removeClass">
+                        <form action='/profile_page/edit_info/' class="form-container" method="post" name="removeForm">
+                            {% csrf_token %}
+                            {% if user.profile.classes %}
+                            {% for class in user.profile.classes.all %}
+                                <input type="checkbox" name="class[]" value="{{class.class_name}}">
+                                <label for="class"> {{class.class_name }}</label><br>
+                            {% endfor %}
+                            {% else %}
+                                <p>No classes to show.</p>
+                            {% endif %}
+                            <p>
+                                
+                            <button type="submit" class="btn" value= "Delete" class="btn">delete</button>
+                            <button type="" class="btn cancel" onclick="closeRemoveForm()">Close</button>
+                            </p>
+                        </form>
+                    </div>
+                {% else %}
+                    <div class="align-items-center" style="text-align: center; background-color: white; border-radius: 20px; padding-left: 0.5rem; padding-right: 0.5rem; padding-top: 0.3rem; padding-bottom: 0.2rem; width: 335px;" href="{% provider_login_url 'google' %}">
+                        <img src="{% static 'assets/img/Google__G__Logo.png' %}" alt="Google Logo" style="margin-bottom: 0.2rem; align-self: left; width:50px; height:50px; "/>
+                        <a class="" style="font-weight: 500; font-size: 2rem; padding-top: 1rem; vertical-align: bottom;" href="{% provider_login_url 'google' %}">
+                            Log in with Google 
+                        </a>
+                    </div>
+                    <div>
+                        <p style="padding-left: 2rem; font-size: 1.2rem;">
+                            to build and view your schedule
                         </p>
-                    </form>
-                </div>
-            {% else %}
-                <div class="align-items-center" style="text-align: center; background-color: white; border-radius: 20px; padding-left: 0.5rem; padding-right: 0.5rem; padding-top: 0.3rem; padding-bottom: 0.2rem; width: 335px;" href="{% provider_login_url 'google' %}">
-                    <img src="{% static 'assets/img/Google__G__Logo.png' %}" alt="Google Logo" style="margin-bottom: 0.2rem; align-self: left; width:50px; height:50px; "/>
-                    <a class="" style="font-weight: 500; font-size: 2rem; padding-top: 1rem; vertical-align: bottom;" href="{% provider_login_url 'google' %}">
-                        Log in with Google 
-                    </a>
-                </div>
-                <div>
-                    <p style="padding-left: 2rem; font-size: 1.2rem;">
-                        to build and view your schedule
-                    </p>
-                </div>
-            {% endif %}
+                    </div>
+                {% endif %}
+            </div>
         </div>
     </body>
 </html>

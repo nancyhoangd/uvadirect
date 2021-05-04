@@ -18,9 +18,9 @@
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
   </head>
-  <body style="background-color: rgb(27, 168, 168);">
+  <body style="background-color: rgb(231, 224, 193)">
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav" style="background-color: rgb(46, 75, 168);">
+    <nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav" style="height: 70px;">
       <div class="container">
           <a class="navbar-brand js-scroll-trigger" href="../../start">
               <!-- compact UVA Logo : aspect ratio 735 x 358 or 2.05 to 1-->
@@ -46,15 +46,14 @@
     </nav>
     
     <!-- MAP DISPLAY -->
-    <div style = "height:600px; padding-top: 6rem;">
-      <a href = ".">
-        <h1 class="page-section-heading text-left text-uppercase text-secondary mb-0" style="padding-top: 1rem; margin-left: 3rem;">Map of Grounds!</h1>
-      </a>
+    <div style = "height: 510px; padding-top: 4rem;">  
+      <h1 class="page-section-heading text-left text-uppercase text-secondary mb-0" style="padding-top: 1rem; margin-left: 3rem;">Map of Grounds!</h1>
+      
       <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
       <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" type="text/css">
       <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
       <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
-      <div id='map' style='margin-left: 1.5rem; margin-right: 1.5rem; height: 750px; padding-top: 1rem'>
+      <div id='map' style='margin-left: 1.5rem; margin-right: 1.5rem; height: 450px; padding-top: 1rem'>
         <script>
           mapboxgl.accessToken = 'pk.eyJ1IjoibWFwcHJvamVjdDMyNDAiLCJhIjoiY2ttdHBzMWJuMGYwcjJ2cGRxaXVhaWtvMCJ9.xH-3a-x9qOF11YWF08rM6Q';
           var map = new mapboxgl.Map({
@@ -83,7 +82,10 @@
    </div>
 
    <!-- Schedule Section -->
-  <div style='margin-left: 3rem; margin-right: 3rem; height: 360px; padding-top: 1rem'>
+  <div style='margin-left: 3rem; margin-right: 3rem; height: 360px; padding-top: 6rem'>
+    <a href="../profile_page/schedule/">
+      <h2 class="page-section-heading text-left text-uppercase mb-0 text-secondary" style="padding-bottom: 0.5rem;">Schedule</h2>
+    </a>
     <div style="width:2000px; max-width: 100%; overflow-x: hidden; margin-bottom: 0.5rem;">
       {% if user.profile.classes %}
           {% for class in user.profile.classes.all %}
@@ -104,11 +106,15 @@
           {% endfor %}
       {% else %}
           <div style="width:2000px; max-width: 100%; overflow-x: hidden;" >
-              <div class="schedule-box" style="background-color: rgb(32, 141, 141);"></div>
-              <div class="schedule-box" style="background-color: rgb(32, 141, 141);"></div>
-              <div class="schedule-box" style="background-color: rgb(32, 141, 141);"></div>
-              <div class="schedule-box" style="background-color: rgb(32, 141, 141);"></div>
-              <div class="schedule-box" style="background-color: rgb(32, 141, 141);"></div>
+              <div class="schedule-box" style="background-color: rgb(207, 202, 181);"></div>
+              <div class="schedule-box" style="background-color: rgb(207, 202, 181);"></div>
+              <div class="schedule-box" style="background-color: rgb(207, 202, 181);"></div>
+              <div class="schedule-box" style="background-color: rgb(207, 202, 181);"></div>
+              <div class="schedule-box" style="background-color: rgb(207, 202, 181);"></div>
+              <div class="schedule-box" style="background-color: rgb(207, 202, 181);"></div>
+          </div>
+          <div>
+            <h2 class="page-section-heading text-left text-uppercase mb-0 text-secondary" style="padding-left: 1.1rem; font-size: 1rem; padding-top: 0.5rem; padding-bottom: 1rem;">go to schedule page to add classes</h2>
           </div>
       {% endif %}
     </div>

@@ -24,10 +24,11 @@
   --white: #fff;
   --gray: #6c757d;
   --gray-dark: #343a40;
-  --primary: #7cbcf0;
-  --secondary: #2f557a;
-  --success: #28a745;
-  --info: #17a2b8;
+  --primary: rgb(10, 0, 150);
+  --secondary: #75b0eb;
+  --secondary-bg: rgb(217, 234, 250);
+  --success: #e6fceb;
+  --info: #1988e4;
   --warning: #ffc107;
   --danger: #dc3545;
   --light: #f8f9fa;
@@ -166,7 +167,7 @@ a {
   background-color: transparent;
 }
 a:hover {
-  color: #117964;
+  color: var(--secondary);
   text-decoration: underline;
 }
 
@@ -3963,6 +3964,7 @@ input[type=button].btn-block {
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 1rem;
+  background-color: rgb(10, 0, 150);
 }
 .navbar .container,
 .navbar .container-fluid,
@@ -9799,11 +9801,11 @@ a.text-secondary:hover, a.text-secondary:focus {
 }
 
 .text-success {
-  color: #28a745 !important;
+  color: #285ba7 !important;
 }
 
 a.text-success:hover, a.text-success:focus {
-  color: #19692c !important;
+  color: #9eaad3 !important;
 }
 
 .text-info {
@@ -10077,13 +10079,13 @@ h3 {
   color: #fff;
 }
 #mainNav .navbar-nav li.nav-item a.nav-link:hover {
-  color: var(--primary);
+  color: var(--secondary);
 }
 #mainNav .navbar-nav li.nav-item a.nav-link:active, #mainNav .navbar-nav li.nav-item a.nav-link:focus {
   color: #fff;
 }
 #mainNav .navbar-nav li.nav-item a.nav-link.active {
-  color: var(--primary);
+  color: var(--secondary);
 }
 #mainNav .navbar-toggler {
   font-size: 80%;
@@ -10224,13 +10226,14 @@ h3 {
   opacity: 1;
 }
 .weather-image {
-  width:100px;
-  height:100px;
+  width:130px;
+  height:130px;
   display: block;
   margin-left: auto;
   margin-right: auto;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  border-radius:15px;
 }
 .weather-image-small {
   width:80px;
@@ -10252,15 +10255,15 @@ h3 {
 }
 .weather-box {
   float:left; 
-  width: 110%;
-  height: 295px;
+  width: 255px;
+  height: 315px;
   background-color: white;
   border-radius: 25px;
 }
 .weather-box-small {
   float:left; 
   height: 130px;
-  width: 14%;
+  width: 125px;
   margin-left: 0.5rem;
   padding-top: 0.5rem;
   background-color: white;
@@ -10270,7 +10273,7 @@ h3 {
   float:left; 
   width: 180px;
   height: 200px;
-  background-color:rgb(162, 177, 226);
+  background-color:rgb(70, 57, 185);
   border-radius: 25px;
   padding: 0.5rem;
   margin-left: .8rem;

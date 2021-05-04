@@ -62,7 +62,6 @@ def parseWeatherResponse(api_response_json):
         "desc": today["weather"][0]["description"],
         "img": getImgURL(today["weather"][0]["description"])
     }
-    print(todayInfo["img"])
     days=[]
     for i in range(6):
         nextDay = api_response_json["daily"][i+1]
@@ -118,7 +117,6 @@ def dtToDate(dt, includeYear=False):
         info[2] = ", " + info[2]
     else:
         info[2] = ""
-    print(info)
     return (info[3], month + " " + info[1]+day + info[2])
 
 def getImgURL(weatherDescription):

@@ -25,7 +25,7 @@
     </head>
     <body id="page-top">
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav" style="background-color: rgb(46, 75, 168);">
+        <nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand js-scroll-trigger" href="#page-top">
                     <!-- compact UVA Logo : aspect ratio 735 x 358 or 2.05 to 1-->
@@ -37,10 +37,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../start">Weather</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../map_page/default">Map</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../profile_page/schedule">Schedule</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../profile_page/friends">Friends</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#weather">Weather</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#map">Map</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#schedule">Schedule</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#friends">Friends</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../profile_page/friends_schedule">Friends Schedule</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../profile_page/privacy">Privacy</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a></li>
@@ -50,7 +50,7 @@
             </div>
         </nav>
         <!-- Masthead-->
-        <header class="masthead text-black text-center masthead-background" style="background-color: rgb(221, 238, 252); padding-top: calc(3rem + 80px); padding-bottom: 4rem;">
+        <header class="masthead text-black text-center masthead-background" style="background-color: var(--secondary-bg); padding-top: calc(3rem + 80px); padding-bottom: 4rem;">
             <div class="container d-flex align-items-center flex-column">  
                 <!-- UVA DIRECT Logo - Aspect ratio of logo: 2095px x 957px or 2.189 to 1 -->
                 <img src="{% static 'assets/img/UVA_Direct_logo.png' %}" alt="UVA Direct" style="width: 656px;height:300px;">
@@ -63,13 +63,13 @@
             </div>
         </header>
         <!-- Weather Section-->
-        <section class="page-section weather" id="weather" style="background-color: rgb(73, 192, 247); height: 500px;">
+        <section class="page-section weather" id="weather" style="background-color: var(--primary); height: 550px;">
             <div class="container">
                 <!-- Weather Section Heading-->
-                <h2 class="page-section-heading text-left text-uppercase text-secondary mb-0">Weather</h2>
+                <h2 class="page-section-heading text-left text-uppercase mb-0" style="color: var(--secondary-bg); padding-bottom: 1rem;">Weather</h2>
                 <div class="container-weather" style="width: 25%; float: left;">
                     <!-- Weather for Today -->
-                    <div class="weather-text-large" style="text-align: left; margin-left: 1rem; margin-bottom: 0.5rem; margin-top: 1rem;">Today</div>
+                    <div class="weather-text-large" style="text-align: left; margin-left: 1rem; margin-bottom: 0.5rem; margin-top: 0.7rem; color: var(--secondary-bg);">Today</div>
                     <div class="weather-box" id="weatherBOXC">
                         <div class="weather-text-large" style="padding-top: 1rem; font-size: 2rem;">{{ weatherInfo.today.weekday }}</div>
                         <div class="weather-text-large" style="padding-top: 0rem; font-size: 1.5rem; color:rgb(104, 123, 151)">{{ weatherInfo.today.date }}</div>
@@ -102,7 +102,7 @@
                 <!-- Extra Weather Info -->
                 <div style="float:left; width: 74%; margin-left: 0.5rem;">
                     <!-- Hourly Weather -->
-                    <div class="weather-text-large" style = "text-align: left; margin-left: 2rem; padding-top: 2rem; padding-bottom: 0.5rem;">Hourly Weather</div>
+                    <div class="weather-text-large" style = "text-align: left; margin-left: 2rem; padding-top: 2rem; padding-bottom: 0.5rem; color: var(--secondary-bg);">Hourly Weather</div>
                     {% for hour in weatherInfo.hours %}
                         <div class = "weather-box-small" style = "margin-bottom: 1rem">
                         <div class="weather-text-small" style="font-size: 1.1rem;">{{ hour.time }}</div>
@@ -131,7 +131,7 @@
                         </div>
                     {% endfor %}
                     <!-- Daily Weather -->
-                    <div class="weather-text-large" style = "text-align: left; margin-left: 2rem; padding-bottom: 0.5rem;">Daily Weather</div>
+                    <div class="weather-text-large" style = "text-align: left; margin-left: 2rem; padding-bottom: 0.5rem; color: var(--secondary-bg);">Daily Weather</div>
                     {% for day in weatherInfo.days %}
                         <div class = "weather-box-small">
                             <div class="weather-text-small" style="font-size: 1.1rem">{{ day.weekday }}</div>
@@ -166,44 +166,45 @@
             </div>
         </section>
 <!-- Map Section -->
-<section class="page-section map" id="map" style="background-color: rgb(27, 168, 168); height: 550px;">
-    <div class="container" style="margin-left: 3rem; margin-right: 3rem; height:50px; padding-bottom: 3rem;">
+<section class="page-section map" id="map" style="background-color: rgb(231, 224, 193); height: 550px;">
+    <div class="container" style="margin-left: 3rem; margin-right: 3rem; padding-bottom: 0rem;">
         <!-- Map Section Heading-->
         <a href="../map_page/default/">
-            <h2 class="page-section-heading text-left text-uppercase text-secondary mb-0">Map</h2>
+            <h2 class="page-section-heading text-left text-uppercase mb-0" style="padding-bottom: 1rem; color: var(--primary);">Map</h2>
         </a>
-
-        <script>
-                    mapboxgl.accessToken = 'pk.eyJ1IjoibWFwcHJvamVjdDMyNDAiLCJhIjoiY2ttdHBzMWJuMGYwcjJ2cGRxaXVhaWtvMCJ9.xH-3a-x9qOF11YWF08rM6Q';
-                    var map = new mapboxgl.Map({
-                    container: 'map',
-                    style: 'mapbox://styles/mapbox/streets-v10',
-                    center: [-78.509, 38.0338],
-                    zoom: 14.5
-                    });
-                    map.scrollZoom.disable();
-                    map.addControl(
-                    new mapboxgl.GeolocateControl({
-                    positionOptions: {
-                    enableHighAccuracy: true
-                    },
-                    trackUserLocation: true
-                    })
-                    );
-        </script>
+        <div style="margin-bottom: 0rem;">
+            <script>
+                        mapboxgl.accessToken = 'pk.eyJ1IjoibWFwcHJvamVjdDMyNDAiLCJhIjoiY2ttdHBzMWJuMGYwcjJ2cGRxaXVhaWtvMCJ9.xH-3a-x9qOF11YWF08rM6Q';
+                        var map = new mapboxgl.Map({
+                        container: 'map',
+                        style: 'mapbox://styles/mapbox/streets-v10',
+                        center: [-78.509, 38.0338],
+                        zoom: 14.5
+                        });
+                        map.scrollZoom.disable();
+                        map.addControl(
+                        new mapboxgl.GeolocateControl({
+                        positionOptions: {
+                        enableHighAccuracy: true
+                        },
+                        trackUserLocation: true
+                        })
+                        );
+            </script>
+        </div>
     </div>
 </section>
 <!-- Schedule Section -->
-<section class="page-section map" id="schedule" style="background-color: rgb(85, 112, 172);">
+<section class="page-section map" id="schedule" style="background-color: var(--primary);">
     <div class="container">
         <!-- Schedule Section Heading-->
         <a href="../profile_page/schedule/">
-            <h2 class="page-section-heading text-left text-uppercase text-secondary mb-0" style="padding-bottom: 1rem;">Schedule</h2>
+            <h2 class="page-section-heading text-left text-uppercase mb-0" style="padding-bottom: 1rem; color: var(--secondary-bg);">Schedule</h2>
         </a>
         <div style="width:2000px; max-width: 100%; overflow-x: hidden; margin-bottom: 1rem;">
             {% if user.profile.classes %}
                 {% for class in user.profile.classes.all %}
-                    <div class="schedule-box" style="background-color: white;">
+                    <div class="schedule-box" style="background-color: var(--secondary-bg);">
                         <div class="weather-text-large" style="padding-top: 1rem; font-size: 1.5rem;">
                             {{ class.class_name }}
                         </div>
@@ -226,16 +227,19 @@
                     <div class="schedule-box"></div>
                     <div class="schedule-box"></div>
                 </div>
+                <div>
+                    <h2 class="page-section-heading text-left text-uppercase mb-0" style="padding-left: 1.1rem; font-size: 1rem; padding-bottom: 1rem; color: var(--secondary-bg);">click on "schedule" to add classes</h2>
+                </div>
             {% endif %}
         </div>
     </div>
 </section>
 <!-- Friends Section -->
-<section class="page-section map" id="friends" style="background-color: rgb(137, 184, 247); height: 500px;">
+<section class="page-section map" id="friends" style="background-color: var(--secondary-bg); height: 500px;">
     <div class="container">
         <!-- Friends Section Heading-->
         <a href="../profile_page/friends/">
-            <h2 class="page-section-heading text-left text-uppercase text-secondary mb-0">Friends</h2>
+            <h2 class="page-section-heading text-left text-uppercase mb-0" style="color: var(--primary); padding-bottom: 1rem;">Friends</h2>
         </a>
         <h3>
             Friends List:
