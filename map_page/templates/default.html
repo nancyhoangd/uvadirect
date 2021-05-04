@@ -39,13 +39,14 @@
                   <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../profile_page/friends_schedule">Friends Schedule</a></li>
                   <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../profile_page/privacy">Privacy</a></li>
                   <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../start#about">About</a></li>
+                  <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=https://cs3240-project-a-4.herokuapp.com/logout">Logout</a></li>
               </ul>
           </div>
       </div>
     </nav>
     
     <!-- MAP DISPLAY -->
-    <div style = "height:550px; padding-top: 6rem;">
+    <div style = "height:600px; padding-top: 6rem;">
       <a href = ".">
         <h1 class="page-section-heading text-left text-uppercase text-secondary mb-0" style="padding-top: 1rem; margin-left: 3rem;">Map of Grounds!</h1>
       </a>
@@ -53,7 +54,7 @@
       <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" type="text/css">
       <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
       <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
-      <div id='map' style='margin-left: 3rem; margin-right: 3rem; height: 360px; padding-top: 1rem'>
+      <div id='map' style='margin-left: 1.5rem; margin-right: 1.5rem; height: 750px; padding-top: 1rem'>
         <script>
           mapboxgl.accessToken = 'pk.eyJ1IjoibWFwcHJvamVjdDMyNDAiLCJhIjoiY2ttdHBzMWJuMGYwcjJ2cGRxaXVhaWtvMCJ9.xH-3a-x9qOF11YWF08rM6Q';
           var map = new mapboxgl.Map({
@@ -83,21 +84,34 @@
 
    <!-- Schedule Section -->
   <div style='margin-left: 3rem; margin-right: 3rem; height: 360px; padding-top: 1rem'>
-        <h3>
-            Schedule:
-            {% if user.profile.classes %}
-            <ul>
-                {% for class in user.profile.classes.all %}
-                <li>
-                    {{class.class_name}} at {{class.time}} on {{class.days}}
-                    in {{class.building}} {{class.building_number}}
-                </li>
-                {% endfor %}
-            </ul>
-            {% else %}
-            <p>No classes to show.</p>
-            {% endif %}
-        </h3>
+    <div style="width:2000px; max-width: 100%; overflow-x: hidden; margin-bottom: 0.5rem;">
+      {% if user.profile.classes %}
+          {% for class in user.profile.classes.all %}
+              <div class="schedule-box" style="background-color: white;">
+                  <div class="weather-text-large" style="padding-top: 0.3rem; font-size: 1.5rem;">
+                      {{ class.class_name }}
+                  </div>
+                  <div class="weather-text-large" style="padding-top: 0rem; font-size: 1.2rem; color:rgb(104, 123, 151)">
+                      {{ class.time }}
+                  </div>
+                  <div class="weather-text-large" style="padding-top: 0rem; font-size: 0.8rem; color:rgb(104, 123, 151)">
+                      {{ class.days }}
+                  </div>
+                  <div class="weather-text-large" style="padding-top: 0.5rem; font-size: 1.5rem;">
+                      {{class.building}} {{class.building_number}}
+                  </div>
+              </div>
+          {% endfor %}
+      {% else %}
+          <div style="width:2000px; max-width: 100%; overflow-x: hidden;" >
+              <div class="schedule-box" style="background-color: rgb(32, 141, 141);"></div>
+              <div class="schedule-box" style="background-color: rgb(32, 141, 141);"></div>
+              <div class="schedule-box" style="background-color: rgb(32, 141, 141);"></div>
+              <div class="schedule-box" style="background-color: rgb(32, 141, 141);"></div>
+              <div class="schedule-box" style="background-color: rgb(32, 141, 141);"></div>
+          </div>
+      {% endif %}
+    </div>
   </div>
   </body>
 </html>

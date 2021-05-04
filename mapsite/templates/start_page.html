@@ -2,7 +2,6 @@
 <html lang="en">
     <head>
         {% load static %}
-        {% get_static_prefix as STATIC_PREFIX %}
         <!-- {% load mathfilters %} -->
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -20,6 +19,9 @@
         <!-- Map API -->
         <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
         <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet'/>
+        <style>
+            .contain {object-fit: contain;}
+        </style>
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -35,13 +37,14 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#weather">Weather</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../start">Weather</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../map_page/default">Map</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../profile_page/schedule">Schedule</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../profile_page/friends">Friends</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../profile_page/friends_schedule">Friends Schedule</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../profile_page/privacy">Privacy</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=https://cs3240-project-a-4.herokuapp.com/logout">Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -54,7 +57,7 @@
                 <!-- Masthead Heading :: No Text-->
                 <h1 class="masthead-heading text-uppercase mb-0"></h1>
                 <!-- Masthead Subheading-->
-                <p class="masthead-subheading font-weight-light mb-0" style="font-weight: bold; padding-top: 4rem;">
+                <p class="masthead-subheading font-weight-light mb-0" style="font-weight: bold; padding-top: 0.5rem;">
                     The Best Way to Connect You to Your Classes
                 </p>
             </div>
@@ -169,6 +172,7 @@
         <a href="../map_page/default/">
             <h2 class="page-section-heading text-left text-uppercase text-secondary mb-0">Map</h2>
         </a>
+
         <script>
                     mapboxgl.accessToken = 'pk.eyJ1IjoibWFwcHJvamVjdDMyNDAiLCJhIjoiY2ttdHBzMWJuMGYwcjJ2cGRxaXVhaWtvMCJ9.xH-3a-x9qOF11YWF08rM6Q';
                     var map = new mapboxgl.Map({
@@ -194,23 +198,36 @@
     <div class="container">
         <!-- Schedule Section Heading-->
         <a href="../profile_page/schedule/">
-            <h2 class="page-section-heading text-left text-uppercase text-secondary mb-0">Schedule</h2>
+            <h2 class="page-section-heading text-left text-uppercase text-secondary mb-0" style="padding-bottom: 1rem;">Schedule</h2>
         </a>
-        <h3>
-            Current Classes:
+        <div style="width:2000px; max-width: 100%; overflow-x: hidden; margin-bottom: 1rem;">
             {% if user.profile.classes %}
-            <ul>
                 {% for class in user.profile.classes.all %}
-                <li>
-                    {{class.class_name}} at {{class.time}} on {{class.days}}
-                    in {{class.building}} {{class.building_number}}
-                </li>
+                    <div class="schedule-box" style="background-color: white;">
+                        <div class="weather-text-large" style="padding-top: 1rem; font-size: 1.5rem;">
+                            {{ class.class_name }}
+                        </div>
+                        <div class="weather-text-large" style="padding-top: 0rem; font-size: 1.2rem; color:rgb(104, 123, 151)">
+                            {{ class.time }}
+                        </div>
+                        <div class="weather-text-large" style="padding-top: 0rem; font-size: 0.8rem; color:rgb(104, 123, 151)">
+                            {{ class.days }}
+                        </div>
+                        <div class="weather-text-large" style="padding-top: 1rem; font-size: 1.5rem;">
+                            {{class.building}} {{class.building_number}}
+                        </div>
+                    </div>
                 {% endfor %}
-            </ul>
             {% else %}
-            <p>No classes to show.</p>
+                <div style="width:2000px; max-width: 100%; overflow-x: hidden;" >
+                    <div class="schedule-box"></div>
+                    <div class="schedule-box"></div>
+                    <div class="schedule-box"></div>
+                    <div class="schedule-box"></div>
+                    <div class="schedule-box"></div>
+                </div>
             {% endif %}
-        </h3>
+        </div>
     </div>
 </section>
 <!-- Friends Section -->
@@ -243,20 +260,63 @@
         <h2 class="page-section-heading text-center text-uppercase text-white" style="padding-bottom: 2rem;">About</h2>
         <!-- About Section Content-->
         <div class="row">
-            <div class="col-lg-4 ml-auto"><p class="lead">Freelancer is a free bootstrap theme created by Start
-                Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well
-                as optional SASS stylesheets for easy customization.</p></div>
-            <div class="col-lg-4 mr-auto"><p class="lead">You can create your own custom avatar for the masthead, change
-                the icon in the dividers, and add your email address to the contact form to make it fully
-                functional!</p></div>
+            <div class="col-lg-4 ml-auto"><p class="lead">UVA Direct is an app designed for UVA students who want to streamline
+                finding classes. This app puts relevant information all in one place 
+                for ease of access for the user.</p></div>
+            <div class="col-lg-4 mr-auto"><p class="lead">You can create your own schedule on the schedule
+                page and view the locations of those classes on the map. You can also add friends to see
+                what their schedules look like as well. </p></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 ml-auto">
+                <p class="lead"> <img class="contain" src="{% static 'assets/img/people/kayla.png' %}" alt="Kayla Kim" class = "col-lg-4 ml-auto"></p>
+            </div>
+            <div class="col-lg-4 mr-auto">
+                <p class="lead"><strong>Kayla Kim: Scrum Master</strong></p>
+                <p class="lead">
+                    Kayla is a second-year Computer Science major originally from Chantilly, Virginia. 
+                    Outside of academia, she is involved in Alpha Kappa Psi, Global Markets Group, McIntire Investment Institute, 
+                    Virginia Finance Institute, and Outdoors Club. 
+                    In her free time, she loves to play soccer, hang out on the lawn with friends, and 
+                    explore conspiracy stories (birds aren't real!) After college, she plans to pursue a career in finance. 
+            </p></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 ml-auto">
+                <p class="lead"> <img class="contain" src="{% static 'assets/img/people/nancy.png' %}" alt="Nancy Hoang" class = "col-lg-4 ml-auto"></p>
+            </div>
+            <div class="col-lg-4 mr-auto">
+                <p class="lead"><strong>Nancy Hoang: Requirements Manager</strong></p>
+                <p class="lead">
+                    Nancy Hoang is a second year (class of 2023) majoring in Computer Science at UVA in the 
+                    College of Arts and Sciences. Outside of academics, Nancy is membership co-chair of 
+                    Vietnamese Student Association and is also involved in Women in Computing Sciences. In her 
+                    free time, Nancy enjoys exploring new restaurants and cities with her friends, getting her 
+                    dose of Vitamin D outside, and reading books. This summer Nancy will be interning with 
+                    Dominion Energy in Richmond, VA (also her hometown) in their IT department. 
+            </p></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 ml-auto">
+                <p class="lead"> <img class="contain" src="{% static 'assets/img/people/asha.png' %}" alt="Asha Maran" class = "col-lg-4 ml-auto"></p>
+            </div>
+            <div class="col-lg-4 mr-auto">
+                <p class="lead"><strong>Asha Maran: DevOps Manager</strong></p>
+                <p class="lead">
+                    Asha Maran is a second-year at UVA studying Computer Science and Cognitive Science in the 
+                    School of Engineering and College of Arts and Sciences respectively. Outside of academics, 
+                    Asha is a member of the Club Swim team, the Society of Women Engineers, and Outdoors Club. 
+                    When not in Charlottesville, she spends time hiking, playing various sports, and 
+                    hanging out with her dog. This summer, she will be interning at Google Pay on the Engagements team. 
+            </p></div>
         </div>
     </div>
 </section>
-<!-- Footer-->
+<!-- Footer>
 <footer class="footer text-center">
     <div class="container">
         <div class="row">
-            <!-- Footer Location-->
+            <!-- Footer Location>
             <div class="col-lg-4 mb-5 mb-lg-0">
                 <h4 class="text-uppercase mb-4">Location</h4>
                 <p class="lead mb-0">
@@ -265,39 +325,25 @@
                     Clark, MO 65243
                 </p>
             </div>
-        </section>
-        <!-- Footer-->
-        <footer class="footer text-center">
-            <div class="container">
-                <div class="row">
-                    <!-- Footer Location-->
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Location</h4>
-                        <p class="lead mb-0">
-                            2215 John Daniel Drive
-                            <br />
-                            Clark, MO 65243
-                        </p>
-                    </div>
-                    <!-- Footer Social Icons-->
+                    <!-- Footer Social Icons>
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <h4 class="text-uppercase mb-4">Around the Web</h4>
                         <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
                         <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
                         <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
                     </div>
-                    <!-- Footer About Text-->
+                    <!-- Footer About Text>
                     <div class="col-lg-4">
-                        <h4 class="text-uppercase mb-4">About Freelancer</h4>
+                        <h4 class="text-uppercase mb-4">About UVA Direct</h4>
                         <p class="lead mb-0">
-                            Freelance is a free to use, MIT licensed Bootstrap theme created by
-                            <a href="http://startbootstrap.com">Start Bootstrap</a>
-                            .
+                            UVA Direct is an app designed for UVA students who want to streamline
+                            finding classes. This app puts relevant information all in one place 
+                            for ease of access for the user.
                         </p>
                     </div>
                 </div>
             </div>
-            <!-- Footer About Text-->
+            <!-- Footer About Text>
             <div class="col-lg-4">
                 <h4 class="text-uppercase mb-4">About Freelancer</h4>
                 <p class="lead mb-0">
@@ -308,21 +354,21 @@
             </div>
         </div>
     </div>
-</footer>
-<!-- Copyright Section-->
+</footer-->
+<!-- Copyright Section
 <div class="copyright py-4 text-center text-white">
     <div class="container">
         <small>
             Copyright &copy; Your Website
             <!-- This script automatically adds the current year to your website footer-->
-            <!-- (credit: https://updateyourfooter.com/)-->
+            <!-- (credit: https://updateyourfooter.com/)>
             <script>
                         document.write(new Date().getFullYear());
 
             </script>
         </small>
     </div>
-</div>
+</div-->
 <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
 <div class="scroll-to-top d-lg-none position-fixed">
     <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i

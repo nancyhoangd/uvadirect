@@ -2,10 +2,19 @@
 {% load static %}
 <html>
 <head>
+    {% load static %}
     <title>Google Registration</title>
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css"/>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 </head>
 <body id="page-top">
-<nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav" style="background-color: rgb(46, 75, 168);">
+<nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav" style="background-color: rgb(46, 75, 168); height: 80px;">
     <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="">
             <!-- compact UVA Logo : aspect ratio 735 x 358 or 2.05 to 1-->
@@ -14,21 +23,30 @@
         </a>
     </div>
 </nav>
-<section class="page-section login" id="login">
-    <center>
-    <div class="container">
-        <h1 class="page-section-heading text-left text-uppercase text-secondary mb-0">Welcome to UVA Direct! Please Log In:</h1>
-        <div class="row justify-content-center">
+<header class="masthead text-black text-center masthead-background" style="background-color: rgb(221, 238, 252); padding-top: calc(3rem + 80px); padding-bottom: 4rem; height: 100%;">
+    <div class="container d-flex align-items-center flex-column">  
+        <h1 class="page-section-heading text-center text-uppercase text-secondary mb-0" style="padding-bottom: 0rem;">Welcome to</h1>
+        <!-- UVA DIRECT Logo - Aspect ratio of logo: 2095px x 957px or 2.189 to 1 -->
+        <img src="{% static 'assets/img/UVA_Direct_logo.png' %}" alt="UVA Direct" style="width: 492px;height:225px;">
+        <!-- Masthead Heading :: No Text-->
+        <div class="row justify-content-center" style="margin-top: 1rem;">
             {% if user.is_authenticated %}
             <meta http-equiv="REFRESH" content="0;url=/start/">
              <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Welcome, {{ user.profile }}!</h2>
+
             {% else %}
-            <a href="{% provider_login_url 'google' %}">Login with Google</a>
+            <div style="background-color: white; border-radius: 20px; padding-left: 0.5rem; padding-right: 0.5rem; padding-top: 0.3rem; padding-bottom: 0.2rem;" href="{% provider_login_url 'google' %}">
+                <img src="{% static 'assets/img/Google__G__Logo.png' %}" alt="Google Logo" style="margin-bottom: 0.2rem; align-self: left; width:50px; height:50px; "/>
+                <a class="" style="font-weight: 500; font-size: 2rem; padding-top: 1rem; vertical-align: bottom;" href="{% provider_login_url 'google' %}">
+                    Log in with Google 
+                </a>
+            </div>
             {% endif %}
         </div>
+        <a style="font-weight: 500; font-size: 1rem; padding-top:0.3rem; vertical-align: bottom;" href="/start">
+            continue to UVA Direct home site
+        </a>
     </div>
-    </center>
-
-
+</header>
 </body>
 </html>
