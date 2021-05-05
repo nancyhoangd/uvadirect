@@ -10167,7 +10167,7 @@ h3 {
   border-radius: 15px;
   border: none;
   cursor: pointer;
-  opacity: 0.8;
+  opacity: 0.9;
   width: 200px;
 }
 
@@ -10179,6 +10179,7 @@ h3 {
   left: 30px;
   border: 3px solid #f1f1f1;
   z-index: 9;
+  width: 15rem;
 }
 
 /* Add styles to the form container */
@@ -10218,7 +10219,7 @@ h3 {
 
 /* Add a red background color to the cancel button */
 .form-container .cancel {
-  background-color: red;
+  background-color: rgb(109, 109, 109);
 }
 
 /* Add some hover effects to buttons */

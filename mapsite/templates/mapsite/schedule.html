@@ -20,7 +20,7 @@
         <!-- Popup script -->
         <script src="{% static 'js/popup.js' %}"></script>
     </head>
-    <body>
+    <body style="background-color: var(--primary);">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav">
             <div class="container">
@@ -48,12 +48,15 @@
                 </div>
             </div>
         </nav>
+        <div style="background-color: var(--secondary-bg); height: 5.5rem;">
+            
+        </div>
         <!--Build/View Schedule Information-->
         <div class="" style="background-color: var(--primary); height: 100%;">
-            <h2 class="page-section-heading text-left text-uppercase mb-0" style="color: var(--secondary-bg); padding-top: 6rem; padding-left: 2rem;  padding-bottom: 1rem;">Schedule</h2>
-            <div class="align-items-center" style="background-color:rgb(138, 154, 209); width:100%; padding: 3rem;">
-                {% if user.is_authenticated %}
-                    <div style="width:2000px; max-width: 100%; overflow-x: hidden; margin-bottom: 1rem;">
+            <h2 class="page-section-heading text-left text-uppercase mb-0" style="color: var(--secondary-bg); padding-top: 2rem; padding-left: 2rem;  padding-bottom: 1rem;">Schedule</h2>
+            <div class="align-items-center" style="height:300px; width:100%; padding: 3rem;">
+                {% if True %}
+                    <div style="width:2000px; max-width: 100%; height: 100%; overflow-x: hidden; margin-bottom: 1rem;">
                         {% if user.profile.classes %}
                             {% for class in user.profile.classes.all %}
                                 <div class="schedule-box" style="background-color: white;">
@@ -90,7 +93,7 @@
                             {{ form }}
                             <br>
                             <button type="submit" class="btn">submit</button>
-                            <button type="" class="btn cancel" onclick="closeAddForm()">Close</button>
+                            <button type="" class="btn cancel" onclick="closeAddForm()">close</button>
                         </form>
                     </div>
                     <button class="open-button" onclick="openRemoveForm()" style="background-color: red;">Remove Class</button>
@@ -107,8 +110,8 @@
                             {% endif %}
                             <p>
                                 
-                            <button type="submit" class="btn" value= "Delete" class="btn">delete</button>
-                            <button type="" class="btn cancel" onclick="closeRemoveForm()">Close</button>
+                            <button type="submit" class="btn" value= "Delete" style="background-color: red;">delete</button>
+                            <button class="btn cancel" onclick="closeRemoveForm()">close</button>
                             </p>
                         </form>
                     </div>
@@ -120,7 +123,7 @@
                         </a>
                     </div>
                     <div>
-                        <p style="padding-left: 2rem; font-size: 1.2rem;">
+                        <p style="padding-left: 2.2rem; font-size: 1.2rem; color: var(--secondary-bg);">
                             to build and view your schedule
                         </p>
                     </div>
