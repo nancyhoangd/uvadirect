@@ -53,11 +53,19 @@ def schedule(request):
             newClass.days = form.cleaned_data['meeting_Days']
             newClass.building = form.cleaned_data['building']
             newClass.building_number = form.cleaned_data['building_room']
-            newClass.save()
 
-            request.user.profile.classes.add(newClass)
-            request.user.save()
-            return HttpResponseRedirect('/profile_page/schedule/')
+            # code added to prevent duplicate class
+            isDuplicate = False
+            for course in request.user.profile.classes.all():
+                if newClass.class_name == course.class_name:
+                    isDuplicate = True
+            if isDuplicate == True:
+                return render(request, 'mapsite/duplicate_class.html/')
+            else:
+                newClass.save()
+                request.user.profile.classes.add(newClass)
+                request.user.save()
+                return HttpResponseRedirect('/profile_page/schedule/')
 
     # if a GET (or any other method) we'll create a blank form
     else:
