@@ -1,6 +1,6 @@
 # project-a-4
 
-UVA Direct is a system built for UVA students enveloping a multitude of features to make the day to day lives of students easier. With this app, students are able to access the weather forecast, view their schedule, as well as use an interactive map to help them find their next class! They can also add friends and view their friends' schedules.
+UVA Direct is an app designed for UVA students who want to streamline finding classes. This app puts relevant information all in one place for ease of access for the user. With this app, students are able to access the weather forecast, view their schedule, and use an interactive map to help them find their next class! They can also add friends and view their friends' schedules.
 
 To access our features, click on the headers on the main page or use the Navigation Bar at the top.
 
