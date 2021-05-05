@@ -1,5 +1,4 @@
 # project-a-4
-project-a-4 created by GitHub Classroom
 
 UVA Direct is a system built for UVA students enveloping a multitude of features to make the day to day lives of students easier. With this app, students are able to access the weather forecast, view their schedule, as well as use an interactive map to help them find their next class! They can also add friends and view their friends' schedules.
 
