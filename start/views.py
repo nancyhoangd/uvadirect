@@ -7,6 +7,15 @@ from datetime import datetime
 import requests
 import json
 
+# place in views.py of start file
+# Title: One Call API
+# Author: n/a
+# Date Accessed: 03/21/21
+# Date Published: n/a
+# URL: https://openweathermap.org/api/one-call-api 
+# Software License: n/a
+
+
 def index_view(request):
     return render(request, 'start_page.html', {'weatherInfo': weather(request)})
 
