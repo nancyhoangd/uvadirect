@@ -113,7 +113,7 @@
                         {% if weatherInfo.today.desc == "few clouds" or weatherInfo.today.desc == "scattered clouds" or weatherInfo.today.desc == "broken clouds" %}
                         <img src="{% static 'assets/img/weatherIcons/partly_cloudy.jpg' %}" alt="partly cloudy" class = "weather-image">
                         {% endif %}
-                        {% if weatherInfo.today.desc == "few clouds" or weatherInfo.today.desc == "heavy intensity rain" %}
+                        {% if weatherInfo.today.desc == "heavy intensity rain" %}
                         <img src="{% static 'assets/img/weatherIcons/heavy_rain.jpg' %}" alt="heavy rain" class = "weather-image">
                         {% endif %}
                         <div class="weather-text-large" style="font-weight: 400; font-size: 2.5em;">{{ weatherInfo.today.F }}&#8457;</div>
