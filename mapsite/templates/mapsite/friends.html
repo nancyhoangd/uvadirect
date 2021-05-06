@@ -93,8 +93,8 @@
                         <form action='/profile_page/friends/accept_or_decline_request/' method="post">
                             <div class="scrollmenu">
                                 {% for request in user.profile.friends_requests.all %}
-                                    {% if request.from_user == user.username %}
-                                        <a class = "f_request" style="padding: 0rem;">{{request.to_user}}
+                                    {% if request.to_user == user.username %}
+                                        <a class = "f_request" style="padding: 0rem;">{{request.from_user}}
                                             <input type="image" src="{% static 'assets/img/check3.jpg' %}" alt = "accept" value="Accept" name = "Accept">
                                             <input type="image" src="{% static 'assets/img/x.png' %}" alt = "decline" value="Decline" name = "Decline" style = "left: 50%;" >
                                         </a>
@@ -110,11 +110,11 @@
                     <h2 class="page-section-heading text-left text-uppercase mb-0" style="color: var(--primary);">
                         Friend Requests Sent
                     </h2>
-                    {% if user.profile.friends_requests.all %}
+                    {% if user.profile.friends_requests %}
                         <div class="scrollmenu">
                             {% for request in user.profile.friends_requests.all %}
-                                {% if request.to_user == user.username %}
-                                    <a>{{request.from_user}}</a>
+                                {% if request.from_user == user.username %}
+                                    <a>{{request.to_user}}</a>
                                 {% endif %}
                             {% endfor %}
                         </div>
