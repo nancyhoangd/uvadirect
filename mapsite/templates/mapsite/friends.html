@@ -53,7 +53,7 @@
         -->
         <div class="align-items-center" style="height:300px; width:100%; padding: 0rem 3rem;">
             <!--  if user.is_authenticated  -->
-            {% if user.is_authenticated %}
+            {% if True %}
                 <h2 class="page-section-heading text-center text-uppercase mb-0" style="color: var(--primary); padding-top: 0.5rem; padding-left: 2rem;  padding-bottom: 1rem;">
                     Hello {{ user.username }}
                 </h2>
@@ -88,7 +88,7 @@
                     <h2 class="page-section-heading text-left text-uppercase mb-0" style="color: var(--primary);">
                         Friend Requests
                     </h2>
-                    {% if user.profile.friends_requests %}
+                    {% if True %}
                         <form action='/profile_page/friends/accept_or_decline_request/' method="post">
                             {% csrf_token %}
                             {% if user.profile.friends_requests %}
@@ -102,8 +102,8 @@
                                 <p>No friends requests to show.</p>
                             {% endif %}
                             <p>
-                                <input type="submit" value="Accept" name = "Accept">
-                                <input type="submit" value="Decline" name = "Decline">
+                                <input class="acceptBox" type="submit" value="Accept" name = "Accept" style="height: 50px; width: 100px; font-size: 1.5rem; color: white; border-radius: 20px; border: none; background-color: rgb(28, 163, 100);">
+                                <input class="acceptBox" type="submit" value="Decline" name = "Decline" style="height: 50px; width: 100px; font-size: 1.5rem; color: white; border-radius: 20px; border: none; background-color: rgb(221, 80, 80);">
                             </p>
                         </form>
                     {% else %}
@@ -138,7 +138,7 @@
                         {% csrf_token %}
                         {{ form }}
                         <br>
-                        <input type="submit" value="Send!" style = "height: 50px; width: 100px; font-size: 1.5rem; color: white; border-radius: 20px; border: none; background-color: var(--primary);">
+                        <input class="acceptBox" type="submit" value="Send!" style = "height: 50px; width: 100px; font-size: 1.5rem; color: white; border-radius: 20px; border: none; background-color: var(--primary);">
                     </form>
                 </div>
                 <div style="padding: 1rem; background-color: var(--secondary-bg); border-radius: 20px;">
@@ -152,7 +152,7 @@
                                 <input type="checkbox" name="friend[]" value="{{friend.profile.username}}">
                                 <label for="friend"> {{friend.profile.username }}</label><br>
                             {% endfor %}
-                        <input type="submit" value="Delete" style = "height: 50px; width: 100px; font-size: 1.5rem; color: white; border-radius: 20px; border: none; background-color: var(--primary);">
+                        <input class="acceptBox" type="submit" value="Delete" style = "height: 50px; width: 100px; font-size: 1.5rem; color: white; border-radius: 20px; border: none; background-color: var(--primary);">
                         {% else %}
                             <p style="color: var(--primary);">No friends to show.</p>
                         {% endif %}

@@ -10359,6 +10359,13 @@ div.scrollmenu a {
   overflow-x: hidden;
 }
 
+input.acceptBox {
+  opacity: 0.8;
+}
+input.acceptBox:hover {
+  opacity: 1;
+}
+
 .friend-box {
   float:left; 
   background:Red;
