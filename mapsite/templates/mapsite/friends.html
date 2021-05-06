@@ -41,7 +41,7 @@
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../privacy">Privacy</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../start#about">About</a></li>
                         {% if user.is_authenticated %}
-                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=https://cs3240-project-a-4.herokuapp.com/logout">Hello {{ user.username }}, Logout</a></li>
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=https://cs3240-project-a-4.herokuapp.com/logout">Logout</a></li>
                         {% endif %}                    
                     </ul>
                 </div>
@@ -93,8 +93,8 @@
                         <form action='/profile_page/friends/accept_or_decline_request/' method="post">
                             <div class="scrollmenu">
                                 {% for request in user.profile.friends_requests.all %}
-                                    {% if request.to_user == user.username %}
-                                        <a class = "f_request" style="padding: 0rem;">{{request.from_user}}
+                                    {% if request.from_user == user.username %}
+                                        <a class = "f_request" style="padding: 0rem;">{{request.to_user}}
                                             <input type="image" src="{% static 'assets/img/check3.jpg' %}" alt = "accept" value="Accept" name = "Accept">
                                             <input type="image" src="{% static 'assets/img/x.png' %}" alt = "decline" value="Decline" name = "Decline" style = "left: 50%;" >
                                         </a>
@@ -131,9 +131,9 @@
                         {% csrf_token %}
                         {% if user.profile.friends_requests %}
                         {% for request in user.profile.friends_requests.all %}
-                            {% if request.from_user == user.username %}
+                            {% if request.to_user == user.username %}
                             <input type="checkbox" name="request[]" value="{{request.from_user}}">
-                            <label for="request"> {{request.to_user}}</label><br>
+                            <label for="request"> {{request.from_user}}</label><br>
                             {% endif %}
                         {% endfor %}
                         {% else %}
