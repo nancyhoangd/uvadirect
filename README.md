@@ -3,7 +3,7 @@
 Introduction
 ============
 * Site: https://cs3240-project-a-4.herokuapp.com/
-* Team Members: Henry Alcaine (UX Designer), Nancy Hoang (Requirements Manager), Kayla Kim (Scrum Master), Asha Maran (DevOps Manager), James Tsai (Testing Manager
+* Team Members: Henry Alcaine (UX Designer), Nancy Hoang (Requirements Manager), Kayla Kim (Scrum Master), Asha Maran (DevOps Manager), James Tsai (Testing Manager)
 * TA: Eric He
 
 Description
