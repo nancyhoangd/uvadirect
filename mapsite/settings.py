@@ -8,6 +8,27 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+# original heroku setup
+# Title: Configuring Django Apps for Heroku
+# Author: n/a
+# Date Accessed: 02/20/2021
+# Date Published: 06/03/2020
+# URL: https://docs.mapbox.com/help/tutorials/getting-started-directions-api/
+# Software License: n/a
+# google oauth login
+# Title: In 5 mins: Set up Google login to sign up users on Django
+# Author: Zoe Chew
+# Date Accessed: 03/02/2021
+# Date Published: 07/27/2019
+# URL: https://whizzoe.medium.com/in-5-mins-set-up-google-login-to-sign-up-users-on-django-e71d5c38f5d5
+# Software License: n/a
+# django allauth
+# Title: Debugging django-allauth Social Network Login Failure
+# Author: n/a
+# Date Accessed: 03/12/2021
+# Date Published: n/a
+# URL: https://stackoverflow.com/questions/36728887/debugging-django-allauth-social-network-login-failure
+# Software License: n/a
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -127,6 +148,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
 
 
 # Activate Django-Heroku.

@@ -4,6 +4,14 @@ from .models import *
 from .forms import *
 from django.contrib.auth.models import User
 
+# place in profile_page test.py 
+# Title: Testing tools
+# Author: n/a (Django Docs)
+# Date Accessed: 05/05/21
+# Date Published: n/a
+# URL: https://docs.djangoproject.com/en/3.2/topics/testing/tools/#django.test.SimpleTestCase.assertRaisesMessage
+# Software License: n/a
+
 class testScheduleForm(TestCase):
 
     def test_valid_form(self):
