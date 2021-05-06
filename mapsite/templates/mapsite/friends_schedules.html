@@ -46,18 +46,23 @@
             </div>
         </nav>
     <h1>
-        <h1 style="padding-top: 6rem">
+        <h2 class="page-section-heading text-center text-uppercase mb-0" style="color: var(--primary); padding-top: 100px; padding-left: 2rem;  padding-bottom: 1rem;">
         Hello {{ user.profile}}, here are your friend's schedules:
+        </h2>
     </h1>
 
+    <div class="align-items-center" style="height:300px; width:100%; padding: 0rem 3rem;">
     <h3>
-        Friends:
         {% if user.profile.friends %}
             <ul>
             {% for friend in user.profile.friends.all %}
-                <li>
-                    {{friend}}
+                <li style="list-style-type: none;"">
+                    <div style="padding: 1rem; background-color: var(--secondary); border-radius: 20px; margin: 20px; margin-top: 10px;">
+                    <h2 class="page-section-heading text-left text-uppercase mb-0" style="color: var(--primary); ">
+                        {{friend}}
+                    </h2>
                     <ul>
+                    <div style="color: white; font-size: 1.5rem;">
                     {% if friend.schedule_sharing %}
                         {% if friend.classes %}
                             {% for class in friend.classes.all %}
@@ -67,10 +72,13 @@
                                 </li>
                             {% endfor %}
                         {% endif %}
+                    </div>
                     {% else %}
-                        <li>
-                            Friend has decided not to share their schedule with friends.
-                        </li>
+                        <p style="padding-left: 0.7rem; text-align: left; font-size: 1.5rem; color: var(--primary); margin: 5px;">
+                            <li>
+                                Friend had decided not to share their schedule with friends.
+                            </li>
+                        </p>
                     {% endif %}
                     </ul>
                 </li>
