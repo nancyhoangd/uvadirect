@@ -88,13 +88,13 @@
                     <h2 class="page-section-heading text-left text-uppercase mb-0" style="color: var(--primary);">
                         Friend Requests
                     </h2>
-                    {% csrf_token %}
                     {% if user.profile.friends_requests %}
                         <form action='/profile_page/friends/accept_or_decline_request/' method="post">
+                            {% csrf_token %}
                             <div class="scrollmenu">
                                 {% for request in user.profile.friends_requests.all %}
                                     {% if request.to_user == user.username %}
-                                        <a class = "f_request" style="padding: 0rem;">{{request.from_user}}
+                                        <a class = "f_request">{{request.from_user}}
                                             <input type="image" src="{% static 'assets/img/check3.jpg' %}" alt = "accept" value="Accept" name = "Accept">
                                             <input type="image" src="{% static 'assets/img/x.png' %}" alt = "decline" value="Decline" name = "Decline" style = "left: 50%;" >
                                         </a>
