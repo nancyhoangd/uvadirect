@@ -10359,33 +10359,6 @@ div.scrollmenu a {
   overflow-x: hidden;
 }
 
-div.scrollmenu a.f_request {
-  overflow: hidden;
-  position: relative;
-}
-div.scrollmenu a.f_request:hover {
-  height: 60px;
-  width: 120px;
-}
-div.scrollmenu a.f_request input {
-  display: none;
-  float: left;
-  width: 50%;
-  opacity: .8;
-  position:absolute;
-  top:0;
-  left:0;
-  z-index:1;
-}
-div.scrollmenu a.f_request:hover input {
-  display: block;
-  background-color: white;
-}
-div.scrollmenu a.f_request:hover input:hover {
-  background-color: white;
-  opacity: 1;
-}
-
 .friend-box {
   float:left; 
   background:Red;

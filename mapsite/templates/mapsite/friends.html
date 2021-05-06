@@ -53,7 +53,7 @@
         -->
         <div class="align-items-center" style="height:300px; width:100%; padding: 0rem 3rem;">
             <!--  if user.is_authenticated  -->
-            {% if True %}
+            {% if user.is_authenticated %}
                 <h2 class="page-section-heading text-center text-uppercase mb-0" style="color: var(--primary); padding-top: 0.5rem; padding-left: 2rem;  padding-bottom: 1rem;">
                     Hello {{ user.username }}
                 </h2>
@@ -91,16 +91,20 @@
                     {% if user.profile.friends_requests %}
                         <form action='/profile_page/friends/accept_or_decline_request/' method="post">
                             {% csrf_token %}
-                            <div class="scrollmenu">
-                                {% for request in user.profile.friends_requests.all %}
-                                    {% if request.to_user == user.username %}
-                                        <a class = "f_request">{{request.from_user}}
-                                            <input type="image" src="{% static 'assets/img/check3.jpg' %}" alt = "accept" value="Accept" name = "Accept">
-                                            <input type="image" src="{% static 'assets/img/x.png' %}" alt = "decline" value="Decline" name = "Decline" style = "left: 50%;" >
-                                        </a>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
+                            {% if user.profile.friends_requests %}
+                            {% for request in user.profile.friends_requests.all %}
+                                {% if request.to_user == user.username %}
+                                <input type="checkbox" name="request[]" value="{{request.from_user}}">
+                                <label for="request"> {{request.from_user}}</label><br>
+                                {% endif %}
+                            {% endfor %}
+                            {% else %}
+                                <p>No friends requests to show.</p>
+                            {% endif %}
+                            <p>
+                                <input type="submit" value="Accept" name = "Accept">
+                                <input type="submit" value="Decline" name = "Decline">
+                            </p>
                         </form>
                     {% else %}
                         <p style="padding-left: 0.7rem; text-align: left; font-size: 1.2rem; color: var(--primary);">
@@ -111,81 +115,48 @@
                         Friend Requests Sent
                     </h2>
                     {% if user.profile.friends_requests %}
-                        <div class="scrollmenu">
-                            {% for request in user.profile.friends_requests.all %}
-                                {% if request.from_user == user.username %}
-                                    <a>{{request.to_user}}</a>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
+                        {% for request in user.profile.friends_requests.all %}
+                            <ul>
+                            {% if request.from_user == user.username %}
+                                <li>
+                                    Pending request to {{request.to_user}}  
+                                </li>
+                            {% endif %}
+                            </ul>
+                        {% endfor %}
                     {% else %}
                         <p style="padding-left: 0.7rem; text-align: left; font-size: 1.2rem; color: var(--primary);">
                             no friend requests pending
                         </p>
                     {% endif %}
                 </div>
-                <h3>
-                    Friends Request:
-                    <br>
-                    <form action='/profile_page/friends/accept_or_decline_request/' method="post">
-                        {% csrf_token %}
-                        {% if user.profile.friends_requests %}
-                        {% for request in user.profile.friends_requests.all %}
-                            {% if request.to_user == user.username %}
-                            <input type="checkbox" name="request[]" value="{{request.from_user}}">
-                            <label for="request"> {{request.from_user}}</label><br>
-                            {% endif %}
-                        {% endfor %}
-                        {% else %}
-                            <p>No friends requests to show.</p>
-                        {% endif %}
-                        <p>
-                            <input type="submit" value="Accept" name = "Accept">
-                            <input type="submit" value="Decline" name = "Decline">
-                        </p>
-                    </form>
-                </h3>
-
-                <h3>
-                    Sent Friend Requests (Pending):
-                    {% for request in user.profile.friends_requests.all %}
-                        <ul>
-                        {% if request.from_user == user.username %}
-                            <li>
-                                Pending request to {{request.to_user}}  
-                            </li>
-                        {% endif %}
-                        </ul>
-                    {% endfor %}
-                </h3>
-                <h3>
-                    Send A Friend Request:
+                <div style="padding: 1rem; background-color: var(--secondary-bg); border-radius: 20px;">
+                    <h2 class="page-section-heading text-left text-uppercase mb-0" style="color: var(--primary);">
+                        Send a Friend Request
+                    </h2>
                     <form action='/profile_page/friends/' method="post">
                         {% csrf_token %}
                         {{ form }}
                         <br>
-                        <input type="submit" value="Done!">
+                        <input type="submit" value="Send!" style = "height: 50px; width: 100px; font-size: 1.5rem; color: white; border-radius: 20px; border: none; background-color: var(--primary);">
                     </form>
-                </h3>
-
-                <h3>
-                    Remove A Friend:
-                    <br>
+                </div>
+                <div style="padding: 1rem; background-color: var(--secondary-bg); border-radius: 20px;">
+                    <h2 class="page-section-heading text-left text-uppercase mb-0" style="color: var(--primary);">
+                        Remove a Friend
+                    </h2>
                     <form action='/profile_page/friends/remove/' method="post">
                         {% csrf_token %}
                         {% if user.profile.friends %}
-                        {% for friend in user.profile.friends.all %}
-                            <input type="checkbox" name="friend[]" value="{{friend.profile.username}}">
-                            <label for="friend"> {{friend.profile.username }}</label><br>
-                        {% endfor %}
+                            {% for friend in user.profile.friends.all %}
+                                <input type="checkbox" name="friend[]" value="{{friend.profile.username}}">
+                                <label for="friend"> {{friend.profile.username }}</label><br>
+                            {% endfor %}
+                        <input type="submit" value="Delete" style = "height: 50px; width: 100px; font-size: 1.5rem; color: white; border-radius: 20px; border: none; background-color: var(--primary);">
                         {% else %}
-                            <p>No friends to show.</p>
+                            <p style="color: var(--primary);">No friends to show.</p>
                         {% endif %}
-                        <p>
-                            <input type="submit" value="Delete">
-                        </p>
                     </form>
-                </h3>
             {% else %}
                 <div class="align-items-center" style="margin: auto; text-align: center; background-color: white; border-radius: 20px; padding-left: 0.5rem; padding-right: 0.5rem; padding-top: 0.3rem; padding-bottom: 0.2rem; width: 400px;" href="{% provider_login_url 'google' %}">
                     <img src="{% static 'assets/img/Google__G__Logo.png' %}" alt="Google Logo" style="margin-bottom: 0.2rem; align-self: left; width:60px; height:60px; "/>
@@ -195,7 +166,7 @@
                 </div>
                 <div>
                     <p style="text-align: center; font-size: 1.2rem; color: var(--primary);">
-                        to build and view your schedule
+                        to connect with other users
                     </p>
                 </div>
             {% endif %}

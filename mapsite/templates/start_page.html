@@ -256,26 +256,35 @@
     </div>
 </section>
 <!-- Friends Section -->
-<section class="page-section map" id="friends" style="background-color: var(--secondary-bg); height: 500px;">
+<section class="page-section map" id="friends" style="background-color: var(--secondary-bg); height: 350px;">
     <div class="container">
         <!-- Friends Section Heading-->
         <a href="../profile_page/friends/">
             <h2 class="page-section-heading text-left text-uppercase mb-0" style="color: var(--primary); padding-bottom: 1rem;">Friends</h2>
         </a>
-        <h3>
-            Friends List:
+        <div style="padding: 1rem; background-color: var(--secondary); border-radius: 20px;">
             {% if user.profile.friends %}
-            <ul>
-                {% for friend in user.profile.friends.all %}
-                <li>
-                    {{friend.profile.username}}
-                </li>
-                {% endfor %}
-            </ul>
+                <div class="scrollmenu">
+                    {% for friend in user.profile.friends.all %}
+                        <a>{{friend.profile.username}}</a>
+                    {% endfor %}
+                </div>
             {% else %}
-            <p>No friends to show.</p>
+                <p style="padding-left: 0.7rem; text-align: left; font-size: 1.2rem; color: var(--primary);">
+                    no friends to show
+                </p>
+                <div class="scrollmenu">
+                    <a style="background-color: #588ec4; height:60px; width: 120px"></a>
+                    <a style="background-color: #588ec4; height:60px; width: 120px"></a>
+                    <a style="background-color: #588ec4; height:60px; width: 120px"></a>
+                    <a style="background-color: #588ec4; height:60px; width: 120px"></a>
+                    <a style="background-color: #588ec4; height:60px; width: 120px"></a>
+                    <a style="background-color: #588ec4; height:60px; width: 120px"></a>
+                    <a style="background-color: #588ec4; height:60px; width: 120px"></a>
+                    <a style="background-color: #588ec4; height:60px; width: 120px"></a>
+                </div>
             {% endif %}
-        </h3>
+        </div>
     </div>
 </section>
 <!-- About Section-->
