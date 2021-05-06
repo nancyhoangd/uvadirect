@@ -28,3 +28,5 @@ To access our features, click on the headers on the main page or use the Navigat
   * Don't want your friends to be able to view your schedule? Turn your setting to private here. You can change your settiing back to public at any time using the same function.
 * About 😄:
   * Meet the team behind UVA Direct!
+* Logout 👋:
+  * When you're done looking at your schedule, map, weather, and friends, log out! When you sign back in, everything will be right where you left it. 
