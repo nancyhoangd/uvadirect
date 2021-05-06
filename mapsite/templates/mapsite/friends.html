@@ -19,7 +19,7 @@
         <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
         <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />}
     </head>
-    <body>
+    <body style="background-color: var(--secondary-bg);">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg text-uppercase fixed-top" id="mainNav">
             <div class="container">
@@ -40,93 +40,165 @@
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../friends_schedule">Friends Schedule</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../privacy">Privacy</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../../start#about">About</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=https://cs3240-project-a-4.herokuapp.com/logout">Logout</a></li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=https://cs3240-project-a-4.herokuapp.com/logout">Hello {{ user.username }}, Logout</a></li>
+                        {% endif %}                    
                     </ul>
                 </div>
             </div>
         </nav>
-    <h1>
-        <h1 style="padding-top: 6rem">
-        Hello {{ user.profile}}, Welcome To Your Friends List:
-    </h1>
+        
+        <div style="padding-top: 7.5rem;"></div>
+        <!--h2 class="page-section-heading text-left text-uppercase mb-0" style="color: var(--primary); padding-top: 7.5rem; padding-left: 2rem;  padding-bottom: 1rem;">Friends</h2>
+        -->
+        <div class="align-items-center" style="height:300px; width:100%; padding: 0rem 3rem;">
+            <!--  if user.is_authenticated  -->
+            {% if True %}
+                <h2 class="page-section-heading text-center text-uppercase mb-0" style="color: var(--primary); padding-top: 0.5rem; padding-left: 2rem;  padding-bottom: 1rem;">
+                    Hello {{ user.username }}
+                </h2>
+                <div style="padding: 1rem; background-color: var(--secondary); border-radius: 20px;">
+                    <h2 class="page-section-heading text-left text-uppercase mb-0" style="color: var(--primary);">
+                        Friends List
+                    </h2>
+                    {% if user.profile.friends %}
+                        <div class="scrollmenu">
+                            {% for friend in user.profile.friends.all %}
+                                <a>{{friend.profile.username}}</a>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p style="padding-left: 0.7rem; text-align: left; font-size: 1.2rem; color: var(--primary);">
+                            no friends to show
+                        </p>
+                        <div class="scrollmenu">
+                            <a style="background-color: #588ec4; height:60px; width: 120px"></a>
+                            <a style="background-color: #588ec4; height:60px; width: 120px"></a>
+                            <a style="background-color: #588ec4; height:60px; width: 120px"></a>
+                            <a style="background-color: #588ec4; height:60px; width: 120px"></a>
+                            <a style="background-color: #588ec4; height:60px; width: 120px"></a>
+                            <a style="background-color: #588ec4; height:60px; width: 120px"></a>
+                            <a style="background-color: #588ec4; height:60px; width: 120px"></a>
+                            <a style="background-color: #588ec4; height:60px; width: 120px"></a>
+                            <a style="background-color: #588ec4; height:60px; width: 120px"></a>
+                        </div>
+                    {% endif %}
+                </div>
+                <div style="padding: 1rem; background-color: var(--secondary-bg); border-radius: 20px;">
+                    <h2 class="page-section-heading text-left text-uppercase mb-0" style="color: var(--primary);">
+                        Friend Requests
+                    </h2>
+                    {% csrf_token %}
+                    {% if user.profile.friends_requests %}
+                        <form action='/profile_page/friends/accept_or_decline_request/' method="post">
+                            <div class="scrollmenu">
+                                {% for request in user.profile.friends_requests.all %}
+                                    {% if request.to_user == user.username %}
+                                        <a class = "f_request" style="padding: 0rem;">{{friend.profile.username}}
+                                            <input type="image" src="{% static 'assets/img/check3.jpg' %}" alt = "accept" value="Accept" name = "Accept">
+                                            <input type="image" src="{% static 'assets/img/x.png' %}" alt = "decline" value="Decline" name = "Decline" style = "left: 50%;" >
+                                        </a>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </form>
+                    {% else %}
+                        <p style="padding-left: 0.7rem; text-align: left; font-size: 1.2rem; color: var(--primary);">
+                            no friend requests
+                        </p>
+                    {% endif %}
+                    <h2 class="page-section-heading text-left text-uppercase mb-0" style="color: var(--primary);">
+                        Friend Requests Sent
+                    </h2>
+                    {% if user.profile.friends_requests.all %}
+                        <div class="scrollmenu">
+                            {% for request in user.profile.friends_requests.all %}
+                                {% if request.to_user == user.username %}
+                                    <a>{{request.from_user}}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p style="padding-left: 0.7rem; text-align: left; font-size: 1.2rem; color: var(--primary);">
+                            no friend requests pending
+                        </p>
+                    {% endif %}
+                </div>
+                <h3>
+                    Friends Request:
+                    <br>
+                    <form action='/profile_page/friends/accept_or_decline_request/' method="post">
+                        {% csrf_token %}
+                        {% if user.profile.friends_requests %}
+                        {% for request in user.profile.friends_requests.all %}
+                            {% if request.to_user == user.username %}
+                            <input type="checkbox" name="request[]" value="{{request.from_user}}">
+                            <label for="request"> {{request.from_user}}</label><br>
+                            {% endif %}
+                        {% endfor %}
+                        {% else %}
+                            <p>No friends requests to show.</p>
+                        {% endif %}
+                        <p>
+                            <input type="submit" value="Accept" name = "Accept">
+                            <input type="submit" value="Decline" name = "Decline">
+                        </p>
+                    </form>
+                </h3>
 
-    <h3>
-        Friends Request:
-        <br>
-        <form action='/profile_page/friends/accept_or_decline_request/' method="post">
-            {% csrf_token %}
-            {% if user.profile.friends_requests %}
-            {% for request in user.profile.friends_requests.all %}
-                {% if request.to_user == user.username %}
-                <input type="checkbox" name="request[]" value="{{request.from_user}}">
-                <label for="request"> {{request.from_user}}</label><br>
-                {% endif %}
-            {% endfor %}
+                <h3>
+                    Sent Friend Requests (Pending):
+                    {% for request in user.profile.friends_requests.all %}
+                        <ul>
+                        {% if request.from_user == user.username %}
+                            <li>
+                                Pending request to {{request.to_user}}  
+                            </li>
+                        {% endif %}
+                        </ul>
+                    {% endfor %}
+                </h3>
+                <h3>
+                    Send A Friend Request:
+                    <form action='/profile_page/friends/' method="post">
+                        {% csrf_token %}
+                        {{ form }}
+                        <br>
+                        <input type="submit" value="Done!">
+                    </form>
+                </h3>
+
+                <h3>
+                    Remove A Friend:
+                    <br>
+                    <form action='/profile_page/friends/remove/' method="post">
+                        {% csrf_token %}
+                        {% if user.profile.friends %}
+                        {% for friend in user.profile.friends.all %}
+                            <input type="checkbox" name="friend[]" value="{{friend.profile.username}}">
+                            <label for="friend"> {{friend.profile.username }}</label><br>
+                        {% endfor %}
+                        {% else %}
+                            <p>No friends to show.</p>
+                        {% endif %}
+                        <p>
+                            <input type="submit" value="Delete">
+                        </p>
+                    </form>
+                </h3>
             {% else %}
-                <p>No friends requests to show.</p>
+                <div class="align-items-center" style="margin: auto; text-align: center; background-color: white; border-radius: 20px; padding-left: 0.5rem; padding-right: 0.5rem; padding-top: 0.3rem; padding-bottom: 0.2rem; width: 400px;" href="{% provider_login_url 'google' %}">
+                    <img src="{% static 'assets/img/Google__G__Logo.png' %}" alt="Google Logo" style="margin-bottom: 0.2rem; align-self: left; width:60px; height:60px; "/>
+                    <a class="" style="font-weight: 500; font-size: 2.4rem; padding-top: 1rem; vertical-align: bottom;" href="{% provider_login_url 'google' %}">
+                        Log in with Google 
+                    </a>
+                </div>
+                <div>
+                    <p style="text-align: center; font-size: 1.2rem; color: var(--primary);">
+                        to build and view your schedule
+                    </p>
+                </div>
             {% endif %}
-            <p>
-                <input type="submit" value="Accept" name = "Accept">
-                <input type="submit" value="Decline" name = "Decline">
-            </p>
-        </form>
-    </h3>
-
-    <h3>
-        Sent Friend Requests (Pending):
-        {% for request in user.profile.friends_requests.all %}
-            <ul>
-            {% if request.from_user == user.username %}
-                <li>
-                    Pending request to {{request.to_user}}  
-                </li>
-            {% endif %}
-            </ul>
-        {% endfor %}
-    </h3>
-
-    <h3>
-        Friends List:
-        {% if user.profile.friends %}
-        <ul>
-        {% for friend in user.profile.friends.all %}
-            <li>
-                {{friend.profile.username}} 
-            </li>
-        {% endfor %}
-        </ul>
-        {% else %}
-            <p>No friends to show.</p>
-        {% endif %}
-    </h3>
-
-    <h3>
-        Send A Friend Request:
-        <form action='/profile_page/friends/' method="post">
-            {% csrf_token %}
-            {{ form }}
-            <br>
-            <input type="submit" value="Done!">
-        </form>
-    </h3>
-
-    <h3>
-        Remove A Friend:
-        <br>
-        <form action='/profile_page/friends/remove/' method="post">
-            {% csrf_token %}
-            {% if user.profile.friends %}
-            {% for friend in user.profile.friends.all %}
-                <input type="checkbox" name="friend[]" value="{{friend.profile.username}}">
-                <label for="friend"> {{friend.profile.username }}</label><br>
-            {% endfor %}
-            {% else %}
-                <p>No friends to show.</p>
-            {% endif %}
-            <p>
-                <input type="submit" value="Delete">
-            </p>
-        </form>
-    </h3>
-
+        </div>
+    </body>
 </html>
